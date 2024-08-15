@@ -1,42 +1,42 @@
-[build-system]
-requires = ["setuptools>=61.0.0"]
-build-backend = "setuptools.build_meta"
-
-[project]
-name = "python-docx"
-authors = [{name = "Steve Canny", email = "stcanny@gmail.com"}]
-classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Environment :: Console",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Topic :: Office/Business :: Office Suites",
-    "Topic :: Software Development :: Libraries",
-]
-dependencies = [
-    "lxml>=3.1.0",
-    "typing_extensions>=4.9.0",
-]
+[tool.poetry]
+name = "skelmis-docx"
+version = "1.1.2"
 description = "Create, read, and update Microsoft Word .docx files."
-dynamic = ["version"]
-keywords = ["docx", "office", "openxml", "word"]
-license = { text = "MIT" }
+authors = ["Skelmis <skelmis.craft@gmail.com>"]
+license = "MIT"
 readme = "README.md"
-requires-python = ">=3.7"
+packages = [{include = "docx", from="src"}]
 
-[project.urls]
-Changelog = "https://github.com/python-openxml/python-docx/blob/master/HISTORY.rst"
-Documentation = "https://python-docx.readthedocs.org/en/latest/"
-Homepage = "https://github.com/python-openxml/python-docx"
-Repository = "https://github.com/python-openxml/python-docx"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+lxml = ">=3.1.0,"
+typing-extensions = "^4.12.2"
+
+
+[tool.poetry.group.dev.dependencies]
+build = "^1.2.1"
+ruff = "^0.5.7"
+setuptools = "^72.2.0"
+tox = "^4.18.0"
+twine = "^5.1.1"
+types-lxml = "^2024.8.7"
+behave = "^1.2.6"
+pyparsing = "^3.1.2"
+pytest = "^8.3.2"
+pytest-coverage = "^0.0"
+pytest-xdist = "^3.6.1"
+
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "1.8.6"
+jinja2 = "2.11.3"
+markupsafe = "0.23"
+alabaster = "<0.7.14"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 100
@@ -108,6 +108,3 @@ select = [
 [tool.ruff.lint.isort]
 known-first-party = ["docx"]
 known-local-folder = ["helpers"]
-
-[tool.setuptools.dynamic]
-version = {attr = "docx.__version__"}
