@@ -1,0 +1,113 @@
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-docx"
+authors = [{name = "Steve Canny", email = "stcanny@gmail.com"}]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Office/Business :: Office Suites",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+    "lxml>=3.1.0",
+    "typing_extensions>=4.9.0",
+]
+description = "Create, read, and update Microsoft Word .docx files."
+dynamic = ["version"]
+keywords = ["docx", "office", "openxml", "word"]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.7"
+
+[project.urls]
+Changelog = "https://github.com/python-openxml/python-docx/blob/master/HISTORY.rst"
+Documentation = "https://python-docx.readthedocs.org/en/latest/"
+Homepage = "https://github.com/python-openxml/python-docx"
+Repository = "https://github.com/python-openxml/python-docx"
+
+[tool.black]
+line-length = 100
+target-version = ["py37", "py38", "py39", "py310", "py311"]
+
+[tool.pyright]
+include = ["src/docx", "tests"]
+pythonPlatform = "All"
+pythonVersion = "3.8"
+reportImportCycles = true
+reportUnnecessaryCast = true
+reportUnnecessaryTypeIgnoreComment = true
+stubPath = "./typings"
+typeCheckingMode = "strict"
+verboseOutput = true
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    # -- exit on any warning not explicitly ignored here --
+    "error",
+
+    # -- pytest-xdist plugin may warn about `looponfailroots` deprecation --
+    "ignore::DeprecationWarning:xdist",
+
+    # -- pytest complains when pytest-xdist is not installed --
+    "ignore:Unknown config option. looponfailroots:pytest.PytestConfigWarning",
+]
+looponfailroots = ["src", "tests"]
+norecursedirs = [
+    "doc",
+    "docx",
+    "*.egg-info",
+    "features",
+    ".git",
+    "ref",
+    "_scratch",
+    ".tox",
+]
+python_files = ["test_*.py"]
+python_classes = ["Test", "Describe"]
+python_functions = ["it_", "its_", "they_", "and_", "but_"]
+
+[tool.ruff]
+exclude = []
+line-length = 100
+target-version = "py38"
+
+[tool.ruff.lint]
+ignore = [
+    "COM812",   # -- over-aggressively insists on trailing commas where not desired --
+    "PT001",    # -- wants @pytest.fixture() instead of @pytest.fixture --
+    "PT005",    # -- wants @pytest.fixture() instead of @pytest.fixture --
+]
+select = [
+    "C4",       # -- flake8-comprehensions --
+    "COM",      # -- flake8-commas --
+    "E",        # -- pycodestyle errors --
+    "F",        # -- pyflakes --
+    "I",        # -- isort (imports) --
+    "PLR0402",  # -- Name compared with itself like `foo == foo` --
+    "PT",       # -- flake8-pytest-style --
+    "SIM",      # -- flake8-simplify --
+    "UP015",    # -- redundant `open()` mode parameter (like "r" is default) --
+    "UP018",    # -- Unnecessary {literal_type} call like `str("abc")`. (rewrite as a literal) --
+    "UP032",    # -- Use f-string instead of `.format()` call --
+    "UP034",    # -- Avoid extraneous parentheses --
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["docx"]
+known-local-folder = ["helpers"]
+
+[tool.setuptools.dynamic]
+version = {attr = "docx.__version__"}
