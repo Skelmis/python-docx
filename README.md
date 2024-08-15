@@ -2,10 +2,12 @@
 
 *python-docx* is a Python library for reading, creating, and updating Microsoft Word 2007+ (.docx) files.
 
+This repository exists as a fork of [the official repo](https://github.com/python-openxml/python-docx) as I needed features and quality of life improvements.
+
 ## Installation
 
 ```
-pip install python-docx
+pip install XXX-TODO-PUBLISH-XXX
 ```
 
 ## Example
