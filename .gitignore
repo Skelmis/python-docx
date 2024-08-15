@@ -9,3 +9,4 @@ _scratch/
 Session.vim
 /.tox/
 .idea
+poetry.lock
