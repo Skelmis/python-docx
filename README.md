@@ -25,4 +25,4 @@ pip install skelmis-docx
 'It was a dark and stormy night.'
 ```
 
-More information is available in the [python-docx documentation](https://python-docx.readthedocs.org/en/latest/)
+More information is available in the [documentation](https://skelmis-docx.readthedocs.io/en/latest/)
