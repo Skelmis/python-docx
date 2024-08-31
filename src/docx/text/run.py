@@ -59,7 +59,7 @@ class Run(StoryChild):
 
     def add_picture(
         self,
-        image_path_or_stream: str | IO[bytes],
+        image_path_or_stream: str | IO[bytes] | Path,
         width: int | Length | None = None,
         height: int | Length | None = None,
     ) -> InlineShape:
@@ -77,13 +77,16 @@ class Run(StoryChild):
         per-inch (dpi) value specified in the image file, defaulting to 72 dpi if no
         value is specified, as is often the case.
         """
+        if isinstance(image_path_or_stream, Path):
+            image_path_or_stream = str(image_path_or_stream)
+
         inline = self.part.new_pic_inline(image_path_or_stream, width, height)
         self._r.add_drawing(inline)
         return InlineShape(inline)
 
     def add_float_picture(
         self,
-        image_path_or_stream: str | Path | bytes,
+        image_path_or_stream: str | IO[bytes] | Path,
         *,
         width: Inches | None = None,
         height: Inches | None = None,
