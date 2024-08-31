@@ -99,6 +99,7 @@ API Documentation
    api/shape
    api/dml
    api/shared
+   api/utility
    api/enum/index
 
 

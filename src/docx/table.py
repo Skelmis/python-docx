@@ -516,12 +516,10 @@ class _Rows(Parented):
         self._tbl = tbl
 
     @overload
-    def __getitem__(self, idx: int) -> _Row:
-        ...
+    def __getitem__(self, idx: int) -> _Row: ...
 
     @overload
-    def __getitem__(self, idx: slice) -> list[_Row]:
-        ...
+    def __getitem__(self, idx: slice) -> list[_Row]: ...
 
     def __getitem__(self, idx: int | slice) -> _Row | list[_Row]:
         """Provide indexed access, (e.g. `rows[0]` or `rows[1:3]`)"""

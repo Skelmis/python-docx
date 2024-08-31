@@ -583,9 +583,7 @@ class CT_Tc(BaseOxmlElement):
             return (
                 ST_Merge.CONTINUE
                 if top_tc is not self
-                else None
-                if height == 1
-                else ST_Merge.RESTART
+                else None if height == 1 else ST_Merge.RESTART
             )
 
         top_tc = self if top_tc is None else top_tc

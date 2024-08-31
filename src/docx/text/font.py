@@ -384,11 +384,7 @@ class Font(ElementProxy):
         return (
             None
             if val == WD_UNDERLINE.INHERITED
-            else True
-            if val == WD_UNDERLINE.SINGLE
-            else False
-            if val == WD_UNDERLINE.NONE
-            else val
+            else True if val == WD_UNDERLINE.SINGLE else False if val == WD_UNDERLINE.NONE else val
         )
 
     @underline.setter

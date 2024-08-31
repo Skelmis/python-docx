@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import IO, TYPE_CHECKING, Iterator, List
 
 from docx.blkcntnr import BlockItemContainer
@@ -144,12 +145,15 @@ class Document(ElementProxy):
         """The |DocumentPart| object of this document."""
         return self._part
 
-    def save(self, path_or_stream: str | IO[bytes]):
+    def save(self, path_or_stream: str | Path | IO[bytes]):
         """Save this document to `path_or_stream`.
 
         `path_or_stream` can be either a path to a filesystem location (a string) or a
         file-like object.
         """
+        if isinstance(path_or_stream, Path):
+            path_or_stream = str(path_or_stream)
+
         self._part.save(path_or_stream)
 
     @property

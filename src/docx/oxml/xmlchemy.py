@@ -155,14 +155,12 @@ class BaseAttribute:
         return self._attr_name
 
     @property
-    def _getter(self) -> Callable[[BaseOxmlElement], Any | None]:
-        ...
+    def _getter(self) -> Callable[[BaseOxmlElement], Any | None]: ...
 
     @property
     def _setter(
         self,
-    ) -> Callable[[BaseOxmlElement, Any | None], None]:
-        ...
+    ) -> Callable[[BaseOxmlElement, Any | None], None]: ...
 
 
 class OptionalAttribute(BaseAttribute):
