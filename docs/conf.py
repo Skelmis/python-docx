@@ -51,7 +51,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "python-docx"
+project = "skelmis-docx"
 copyright = "2013-2024, Steve Canny. 2024-Current, Skelmis"
 
 # The version info for the project you're documenting, acts as replacement for
