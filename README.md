@@ -7,7 +7,7 @@ This repository exists as a fork of [the official repo](https://github.com/pytho
 ## Installation
 
 ```
-pip install XXX-TODO-PUBLISH-XXX
+pip install skelmis-docx
 ```
 
 ## Example
