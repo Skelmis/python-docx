@@ -27,12 +27,8 @@ pytest = "^8.3.2"
 pytest-coverage = "^0.0"
 pytest-xdist = "^3.6.1"
 
-
 [tool.poetry.group.docs.dependencies]
-sphinx = "1.8.6"
-jinja2 = "2.11.3"
-markupsafe = "0.23"
-alabaster = "<0.7.14"
+sphinx = "^8.0.2"
 
 [build-system]
 requires = ["poetry-core"]
