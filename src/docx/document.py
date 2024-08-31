@@ -68,6 +68,10 @@ class Document(ElementProxy):
         """
         return self._body.add_paragraph(text, style)
 
+    def add_floating_picture(self):
+        """"""
+        # Source reference: https://github.com/ArtifexSoftware/pdf2docx/issues/54#issuecomment-715925252
+
     def add_picture(
         self,
         image_path_or_stream: str | IO[bytes],

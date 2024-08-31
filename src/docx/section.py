@@ -265,10 +265,12 @@ class Sections(Sequence[Section]):
         self._document_part = document_part
 
     @overload
-    def __getitem__(self, key: int) -> Section: ...
+    def __getitem__(self, key: int) -> Section:
+        ...
 
     @overload
-    def __getitem__(self, key: slice) -> List[Section]: ...
+    def __getitem__(self, key: slice) -> List[Section]:
+        ...
 
     def __getitem__(self, key: int | slice) -> Section | List[Section]:
         if isinstance(key, slice):

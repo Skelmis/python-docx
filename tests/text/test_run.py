@@ -42,9 +42,7 @@ class DescribeRun:
             ("w:r/(w:lastRenderedPageBreak, w:lastRenderedPageBreak)", True),
         ],
     )
-    def it_knows_whether_it_contains_a_page_break(
-        self, r_cxml: str, expected_value: bool
-    ):
+    def it_knows_whether_it_contains_a_page_break(self, r_cxml: str, expected_value: bool):
         r = cast(CT_R, element(r_cxml))
         run = Run(r, None)  # pyright: ignore[reportGeneralTypeIssues]
 

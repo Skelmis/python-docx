@@ -19,7 +19,6 @@ from ..unitutil.mock import FixtureRequest, Mock, call, instance_mock, method_mo
 
 
 class DescribeCT_Row:
-
     @pytest.mark.parametrize(
         ("tr_cxml", "expected_cxml"),
         [

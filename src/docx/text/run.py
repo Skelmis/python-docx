@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import IO, TYPE_CHECKING, Iterator, cast
 
 from docx.drawing import Drawing
@@ -10,7 +11,7 @@ from docx.enum.text import WD_BREAK
 from docx.oxml.drawing import CT_Drawing
 from docx.oxml.text.pagebreak import CT_LastRenderedPageBreak
 from docx.shape import InlineShape
-from docx.shared import StoryChild
+from docx.shared import StoryChild, Inches, Pt
 from docx.styles.style import CharacterStyle
 from docx.text.font import Font
 from docx.text.pagebreak import RenderedPageBreak
@@ -79,6 +80,27 @@ class Run(StoryChild):
         inline = self.part.new_pic_inline(image_path_or_stream, width, height)
         self._r.add_drawing(inline)
         return InlineShape(inline)
+
+    def add_float_picture(
+        self,
+        image_path_or_stream: str | Path | bytes,
+        *,
+        width: Inches | None = None,
+        height: Inches | None = None,
+        pos_x: Pt | int = 0,
+        pos_y: Pt | int = 0,
+    ):
+        """Add a floating picture at a fixed position.
+
+        `pos_x` and `pos_y` are to the top-left point of page.
+        """
+        if isinstance(image_path_or_stream, Path):
+            image_path_or_stream = str(image_path_or_stream)
+
+        anchor = self.part.new_pic_anchor(
+            self.part, image_path_or_stream, width, height, pos_x, pos_y
+        )
+        self._r.add_drawing(anchor)
 
     def add_tab(self) -> None:
         """Add a ``<w:tab/>`` element at the end of the run, which Word interprets as a

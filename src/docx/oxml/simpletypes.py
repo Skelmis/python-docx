@@ -36,10 +36,12 @@ class BaseSimpleType:
         return int(str_value)
 
     @classmethod
-    def convert_to_xml(cls, value: Any) -> str: ...
+    def convert_to_xml(cls, value: Any) -> str:
+        ...
 
     @classmethod
-    def validate(cls, value: Any) -> None: ...
+    def validate(cls, value: Any) -> None:
+        ...
 
     @classmethod
     def validate_int(cls, value: object):

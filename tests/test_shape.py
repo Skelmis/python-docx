@@ -174,9 +174,7 @@ class DescribeInlineShape:
                     a_graphicData()
                     .with_uri(picture_ns)
                     .with_child(
-                        a_pic()
-                        .with_nsdecls()
-                        .with_child(a_blipFill().with_child(blip_bldr))
+                        a_pic().with_nsdecls().with_child(a_blipFill().with_child(blip_bldr))
                     )
                 )
             )
@@ -187,8 +185,6 @@ class DescribeInlineShape:
         inline = (
             an_inline()
             .with_nsdecls("wp")
-            .with_child(
-                a_graphic().with_nsdecls().with_child(a_graphicData().with_uri(uri))
-            )
+            .with_child(a_graphic().with_nsdecls().with_child(a_graphicData().with_uri(uri)))
         ).element
         return inline

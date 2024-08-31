@@ -47,9 +47,7 @@ class DescribePackage:
 
 
 class DescribeImageParts:
-    def it_can_get_a_matching_image_part(
-        self, Image_, image_, _get_by_sha1_, image_part_
-    ):
+    def it_can_get_a_matching_image_part(self, Image_, image_, _get_by_sha1_, image_part_):
         Image_.from_file.return_value = image_
         image_.sha1 = "f005ba11"
         _get_by_sha1_.return_value = image_part_

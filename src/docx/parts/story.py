@@ -6,7 +6,7 @@ from typing import IO, TYPE_CHECKING, Tuple, cast
 
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.opc.part import XmlPart
-from docx.oxml.shape import CT_Inline
+from docx.oxml.shape import CT_Inline, CT_Anchor
 from docx.shared import Length, lazyproperty
 
 if TYPE_CHECKING:
@@ -56,6 +56,17 @@ class StoryPart(XmlPart):
         wrong type or names a style not present in the document.
         """
         return self._document_part.get_style_id(style_or_name, style_type)
+
+    def new_pic_anchor(self, part, image_descriptor, width, height, pos_x, pos_y) -> CT_Anchor:
+        """Return a newly-created `w:anchor` element.
+
+        The element contains the image specified by *image_descriptor* and is scaled
+        based on the values of *width* and *height*.
+        """
+        rId, image = part.get_or_add_image(image_descriptor)
+        cx, cy = image.scaled_dimensions(width, height)
+        shape_id, filename = part.next_id, image.filename
+        return CT_Anchor.new_pic_anchor(shape_id, rId, filename, cx, cy, pos_x, pos_y)
 
     def new_pic_inline(
         self,

@@ -75,9 +75,7 @@ class DescribeStyleFactory:
 
     @pytest.fixture
     def _TableStyle_(self, request, table_style_):
-        return class_mock(
-            request, "docx.styles.style._TableStyle", return_value=table_style_
-        )
+        return class_mock(request, "docx.styles.style._TableStyle", return_value=table_style_)
 
     @pytest.fixture
     def table_style_(self, request):
@@ -536,9 +534,7 @@ class DescribeParagraphStyle:
         style_elms = {"H": styles[0], "B": styles[1]}
         style = ParagraphStyle(style_elms[style_name])
         next_style = (
-            None
-            if next_style_name is None
-            else ParagraphStyle(style_elms[next_style_name])
+            None if next_style_name is None else ParagraphStyle(style_elms[next_style_name])
         )
         expected_xml = xml(style_cxml)
         return style, next_style, expected_xml

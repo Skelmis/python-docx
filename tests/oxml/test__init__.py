@@ -12,9 +12,7 @@ class DescribeOxmlElement:
     def it_returns_an_lxml_element_with_matching_tag_name(self):
         element = OxmlElement("a:foo")
         assert isinstance(element, etree._Element)
-        assert element.tag == (
-            "{http://schemas.openxmlformats.org/drawingml/2006/main}foo"
-        )
+        assert element.tag == ("{http://schemas.openxmlformats.org/drawingml/2006/main}foo")
 
     def it_adds_supplied_attributes(self):
         element = OxmlElement("a:foo", {"a": "b", "c": "d"})

@@ -65,9 +65,7 @@ class DescribeSections:
     ):
         document_elm = cast(
             CT_Document,
-            element(
-                "w:document/w:body/(w:p/w:pPr/w:sectPr,w:p/w:pPr/w:sectPr,w:sectPr)"
-            ),
+            element("w:document/w:body/(w:p/w:pPr/w:sectPr,w:p/w:pPr/w:sectPr,w:sectPr)"),
         )
         sectPrs = document_elm.xpath("//w:sectPr")
         Section_.return_value = section_
@@ -87,9 +85,7 @@ class DescribeSections:
     ):
         document_elm = cast(
             CT_Document,
-            element(
-                "w:document/w:body/(w:p/w:pPr/w:sectPr,w:p/w:pPr/w:sectPr,w:sectPr)"
-            ),
+            element("w:document/w:body/(w:p/w:pPr/w:sectPr,w:p/w:pPr/w:sectPr,w:sectPr)"),
         )
         sectPrs = document_elm.xpath("//w:sectPr")
         Section_.return_value = section_
@@ -170,9 +166,7 @@ class DescribeSection:
 
         footer = section.even_page_footer
 
-        _Footer_.assert_called_once_with(
-            sectPr, document_part_, WD_HEADER_FOOTER.EVEN_PAGE
-        )
+        _Footer_.assert_called_once_with(sectPr, document_part_, WD_HEADER_FOOTER.EVEN_PAGE)
         assert footer is footer_
 
     def it_provides_access_to_its_even_page_header(
@@ -184,9 +178,7 @@ class DescribeSection:
 
         header = section.even_page_header
 
-        _Header_.assert_called_once_with(
-            sectPr, document_part_, WD_HEADER_FOOTER.EVEN_PAGE
-        )
+        _Header_.assert_called_once_with(sectPr, document_part_, WD_HEADER_FOOTER.EVEN_PAGE)
         assert header is header_
 
     def it_provides_access_to_its_first_page_footer(
@@ -198,9 +190,7 @@ class DescribeSection:
 
         footer = section.first_page_footer
 
-        _Footer_.assert_called_once_with(
-            sectPr, document_part_, WD_HEADER_FOOTER.FIRST_PAGE
-        )
+        _Footer_.assert_called_once_with(sectPr, document_part_, WD_HEADER_FOOTER.FIRST_PAGE)
         assert footer is footer_
 
     def it_provides_access_to_its_first_page_header(
@@ -212,9 +202,7 @@ class DescribeSection:
 
         header = section.first_page_header
 
-        _Header_.assert_called_once_with(
-            sectPr, document_part_, WD_HEADER_FOOTER.FIRST_PAGE
-        )
+        _Header_.assert_called_once_with(sectPr, document_part_, WD_HEADER_FOOTER.FIRST_PAGE)
         assert header is header_
 
     def it_provides_access_to_its_default_footer(
@@ -226,9 +214,7 @@ class DescribeSection:
 
         footer = section.footer
 
-        _Footer_.assert_called_once_with(
-            sectPr, document_part_, WD_HEADER_FOOTER.PRIMARY
-        )
+        _Footer_.assert_called_once_with(sectPr, document_part_, WD_HEADER_FOOTER.PRIMARY)
         assert footer is footer_
 
     def it_provides_access_to_its_default_header(
@@ -240,9 +226,7 @@ class DescribeSection:
 
         header = section.header
 
-        _Header_.assert_called_once_with(
-            sectPr, document_part_, WD_HEADER_FOOTER.PRIMARY
-        )
+        _Header_.assert_called_once_with(sectPr, document_part_, WD_HEADER_FOOTER.PRIMARY)
         assert header is header_
 
     def it_can_iterate_its_inner_content(self):
@@ -562,16 +546,12 @@ class DescribeSection:
 class Describe_BaseHeaderFooter:
     """Unit-test suite for `docx.section._BaseHeaderFooter`."""
 
-    @pytest.mark.parametrize(
-        ("has_definition", "expected_value"), [(False, True), (True, False)]
-    )
+    @pytest.mark.parametrize(("has_definition", "expected_value"), [(False, True), (True, False)])
     def it_knows_when_its_linked_to_the_previous_header_or_footer(
         self, has_definition: bool, expected_value: bool, _has_definition_prop_: Mock
     ):
         _has_definition_prop_.return_value = has_definition
-        header = _BaseHeaderFooter(
-            None, None, None  # pyright: ignore[reportGeneralTypeIssues]
-        )
+        header = _BaseHeaderFooter(None, None, None)  # pyright: ignore[reportGeneralTypeIssues]
 
         is_linked = header.is_linked_to_previous
 
@@ -597,9 +577,7 @@ class Describe_BaseHeaderFooter:
         _add_definition_: Mock,
     ):
         _has_definition_prop_.return_value = has_definition
-        header = _BaseHeaderFooter(
-            None, None, None  # pyright: ignore[reportGeneralTypeIssues]
-        )
+        header = _BaseHeaderFooter(None, None, None)  # pyright: ignore[reportGeneralTypeIssues]
 
         header.is_linked_to_previous = value
 
@@ -611,9 +589,7 @@ class Describe_BaseHeaderFooter:
     ):
         # ---this override fulfills part of the BlockItemContainer subclass interface---
         _get_or_add_definition_.return_value = header_part_
-        header = _BaseHeaderFooter(
-            None, None, None  # pyright: ignore[reportGeneralTypeIssues]
-        )
+        header = _BaseHeaderFooter(None, None, None)  # pyright: ignore[reportGeneralTypeIssues]
 
         header_part = header.part
 
@@ -626,9 +602,7 @@ class Describe_BaseHeaderFooter:
         hdr = element("w:hdr")
         _get_or_add_definition_.return_value = header_part_
         header_part_.element = hdr
-        header = _BaseHeaderFooter(
-            None, None, None  # pyright: ignore[reportGeneralTypeIssues]
-        )
+        header = _BaseHeaderFooter(None, None, None)  # pyright: ignore[reportGeneralTypeIssues]
 
         hdr_elm = header._element
 
@@ -640,9 +614,7 @@ class Describe_BaseHeaderFooter:
     ):
         _has_definition_prop_.return_value = True
         _definition_prop_.return_value = header_part_
-        header = _BaseHeaderFooter(
-            None, None, None  # pyright: ignore[reportGeneralTypeIssues]
-        )
+        header = _BaseHeaderFooter(None, None, None)  # pyright: ignore[reportGeneralTypeIssues]
 
         header_part = header._get_or_add_definition()
 
@@ -658,9 +630,7 @@ class Describe_BaseHeaderFooter:
         _has_definition_prop_.return_value = False
         _prior_headerfooter_prop_.return_value = prior_headerfooter_
         prior_headerfooter_._get_or_add_definition.return_value = header_part_
-        header = _BaseHeaderFooter(
-            None, None, None  # pyright: ignore[reportGeneralTypeIssues]
-        )
+        header = _BaseHeaderFooter(None, None, None)  # pyright: ignore[reportGeneralTypeIssues]
 
         header_part = header._get_or_add_definition()
 
@@ -677,9 +647,7 @@ class Describe_BaseHeaderFooter:
         _has_definition_prop_.return_value = False
         _prior_headerfooter_prop_.return_value = None
         _add_definition_.return_value = header_part_
-        header = _BaseHeaderFooter(
-            None, None, None  # pyright: ignore[reportGeneralTypeIssues]
-        )
+        header = _BaseHeaderFooter(None, None, None)  # pyright: ignore[reportGeneralTypeIssues]
 
         header_part = header._get_or_add_definition()
 
@@ -724,9 +692,7 @@ class Describe_BaseHeaderFooter:
 class Describe_Footer:
     """Unit-test suite for `docx.section._Footer`."""
 
-    def it_can_add_a_footer_part_to_help(
-        self, document_part_: Mock, footer_part_: Mock
-    ):
+    def it_can_add_a_footer_part_to_help(self, document_part_: Mock, footer_part_: Mock):
         sectPr = element("w:sectPr{r:a=b}")
         document_part_.add_footer_part.return_value = footer_part_, "rId3"
         footer = _Footer(sectPr, document_part_, WD_HEADER_FOOTER.PRIMARY)
@@ -734,9 +700,7 @@ class Describe_Footer:
         footer_part = footer._add_definition()
 
         document_part_.add_footer_part.assert_called_once_with()
-        assert sectPr.xml == xml(
-            "w:sectPr{r:a=b}/w:footerReference{w:type=default,r:id=rId3}"
-        )
+        assert sectPr.xml == xml("w:sectPr{r:a=b}/w:footerReference{w:type=default,r:id=rId3}")
         assert footer_part is footer_part_
 
     def it_provides_access_to_its_footer_part_to_help(
@@ -785,9 +749,7 @@ class Describe_Footer:
 
         prior_footer = footer._prior_headerfooter
 
-        _Footer_.assert_called_once_with(
-            prior_sectPr, document_part_, WD_HEADER_FOOTER.EVEN_PAGE
-        )
+        _Footer_.assert_called_once_with(prior_sectPr, document_part_, WD_HEADER_FOOTER.EVEN_PAGE)
         assert prior_footer is footer_
 
     def but_it_returns_None_when_its_the_first_footer(self):
@@ -815,9 +777,7 @@ class Describe_Footer:
 
 
 class Describe_Header:
-    def it_can_add_a_header_part_to_help(
-        self, document_part_: Mock, header_part_: Mock
-    ):
+    def it_can_add_a_header_part_to_help(self, document_part_: Mock, header_part_: Mock):
         sectPr = element("w:sectPr{r:a=b}")
         document_part_.add_header_part.return_value = header_part_, "rId3"
         header = _Header(sectPr, document_part_, WD_HEADER_FOOTER.FIRST_PAGE)
@@ -825,9 +785,7 @@ class Describe_Header:
         header_part = header._add_definition()
 
         document_part_.add_header_part.assert_called_once_with()
-        assert sectPr.xml == xml(
-            "w:sectPr{r:a=b}/w:headerReference{w:type=first,r:id=rId3}"
-        )
+        assert sectPr.xml == xml("w:sectPr{r:a=b}/w:headerReference{w:type=first,r:id=rId3}")
         assert header_part is header_part_
 
     def it_provides_access_to_its_header_part_to_help(
@@ -876,9 +834,7 @@ class Describe_Header:
 
         prior_header = header._prior_headerfooter
 
-        _Header_.assert_called_once_with(
-            prior_sectPr, document_part_, WD_HEADER_FOOTER.PRIMARY
-        )
+        _Header_.assert_called_once_with(prior_sectPr, document_part_, WD_HEADER_FOOTER.PRIMARY)
         assert prior_header is header_
 
     def but_it_returns_None_when_its_the_first_header(self):

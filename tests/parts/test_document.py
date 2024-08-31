@@ -95,17 +95,13 @@ class DescribeDocumentPart:
         core_properties = document_part.core_properties
         assert core_properties is core_properties_
 
-    def it_provides_access_to_the_inline_shapes_in_the_document(
-        self, inline_shapes_fixture
-    ):
+    def it_provides_access_to_the_inline_shapes_in_the_document(self, inline_shapes_fixture):
         document, InlineShapes_, body_elm = inline_shapes_fixture
         inline_shapes = document.inline_shapes
         InlineShapes_.assert_called_once_with(body_elm, document)
         assert inline_shapes is InlineShapes_.return_value
 
-    def it_provides_access_to_the_numbering_part(
-        self, part_related_by_, numbering_part_
-    ):
+    def it_provides_access_to_the_numbering_part(self, part_related_by_, numbering_part_):
         part_related_by_.return_value = numbering_part_
         document_part = DocumentPart(None, None, None, None)
 
@@ -147,9 +143,7 @@ class DescribeDocumentPart:
         styles_.get_style_id.assert_called_once_with(style_, WD_STYLE_TYPE.CHARACTER)
         assert style_id == "BodyCharacter"
 
-    def it_provides_access_to_its_settings_part_to_help(
-        self, part_related_by_, settings_part_
-    ):
+    def it_provides_access_to_its_settings_part_to_help(self, part_related_by_, settings_part_):
         part_related_by_.return_value = settings_part_
         document_part = DocumentPart(None, None, None, None)
 
@@ -171,9 +165,7 @@ class DescribeDocumentPart:
         relate_to_.assert_called_once_with(document_part, settings_part_, RT.SETTINGS)
         assert settings_part is settings_part_
 
-    def it_provides_access_to_its_styles_part_to_help(
-        self, part_related_by_, styles_part_
-    ):
+    def it_provides_access_to_its_styles_part_to_help(self, part_related_by_, styles_part_):
         part_related_by_.return_value = styles_part_
         document_part = DocumentPart(None, None, None, None)
 

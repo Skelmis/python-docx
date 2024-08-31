@@ -284,9 +284,7 @@ class _Marker:
 class _App0Marker(_Marker):
     """Represents a JFIF APP0 marker segment."""
 
-    def __init__(
-        self, marker_code, offset, length, density_units, x_density, y_density
-    ):
+    def __init__(self, marker_code, offset, length, density_units, x_density, y_density):
         super(_App0Marker, self).__init__(marker_code, offset, length)
         self._density_units = density_units
         self._x_density = x_density
@@ -332,9 +330,7 @@ class _App0Marker(_Marker):
         density_units = stream.read_byte(offset, 9)
         x_density = stream.read_short(offset, 10)
         y_density = stream.read_short(offset, 12)
-        return cls(
-            marker_code, offset, segment_length, density_units, x_density, y_density
-        )
+        return cls(marker_code, offset, segment_length, density_units, x_density, y_density)
 
 
 class _App1Marker(_Marker):

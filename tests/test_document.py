@@ -72,9 +72,7 @@ class DescribeDocument:
         run_.add_picture.assert_called_once_with(path, width, height)
         assert picture is picture_
 
-    def it_can_add_a_section(
-        self, add_section_fixture, Section_, section_, document_part_
-    ):
+    def it_can_add_a_section(self, add_section_fixture, Section_, section_, document_part_):
         document_elm, start_type, expected_xml = add_section_fixture
         Section_.return_value = section_
         document = Document(document_elm, document_part_)
@@ -210,9 +208,7 @@ class DescribeDocument:
     def add_section_fixture(self, request):
         sentinel, start_type, new_sentinel = request.param
         document_elm = element("w:document/w:body/(w:p,%s)" % sentinel)
-        expected_xml = xml(
-            "w:document/w:body/(w:p,w:p/w:pPr/%s,%s)" % (sentinel, new_sentinel)
-        )
+        expected_xml = xml("w:document/w:body/(w:p,w:p/w:pPr/%s,%s)" % (sentinel, new_sentinel))
         return document_elm, start_type, expected_xml
 
     @pytest.fixture

@@ -10,3 +10,7 @@ Session.vim
 /.tox/
 .idea
 poetry.lock
+
+test.py
+cat.docx
+cat.jpeg
