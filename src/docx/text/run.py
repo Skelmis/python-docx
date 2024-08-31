@@ -92,18 +92,34 @@ class Run(StoryChild):
         height: Inches | None = None,
         pos_x: Pt | int = 0,
         pos_y: Pt | int = 0,
-    ):
+    ) -> InlineShape:
         """Add a floating picture at a fixed position.
 
         `pos_x` and `pos_y` are to the top-left point of page.
+
+        `image_path_or_stream` can be a path (a string) or a file-like object containing
+        a binary image.
+
+        If neither width nor height is specified, the picture appears at
+        its native size. If only one is specified, it is used to compute a scaling
+        factor that is then applied to the unspecified dimension, preserving the aspect
+        ratio of the image. The native size of the picture is calculated using the dots-
+        per-inch (dpi) value specified in the image file, defaulting to 72 dpi if no
+        value is specified, as is often the case.
         """
         if isinstance(image_path_or_stream, Path):
             image_path_or_stream = str(image_path_or_stream)
 
         anchor = self.part.new_pic_anchor(
-            self.part, image_path_or_stream, width, height, pos_x, pos_y
+            self.part,
+            image_path_or_stream,
+            width,
+            height,
+            pos_x,
+            pos_y,
         )
         self._r.add_drawing(anchor)
+        return InlineShape(anchor)
 
     def add_tab(self) -> None:
         """Add a ``<w:tab/>`` element at the end of the run, which Word interprets as a
