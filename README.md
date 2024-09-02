@@ -4,6 +4,11 @@
 
 This repository exists as a fork of [the official repo](https://github.com/python-openxml/python-docx) as I needed features and quality of life improvements.
 
+Key differences at a glance:
+- Supporting multiple numbered lists within a document
+- Supporting TOC updates within the package without the need to open the document manually
+- Supporting floating images within documents
+
 ## Installation
 
 ```
