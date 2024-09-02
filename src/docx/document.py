@@ -8,9 +8,11 @@ from __future__ import annotations
 from pathlib import Path
 from typing import IO, TYPE_CHECKING, Iterator, List
 
+import docx
 from docx.blkcntnr import BlockItemContainer
 from docx.enum.section import WD_SECTION
 from docx.enum.text import WD_BREAK
+from docx.oxml import simpletypes
 from docx.section import Section, Sections
 from docx.shared import ElementProxy, Emu
 
@@ -37,6 +39,55 @@ class Document(ElementProxy):
         self._element = element
         self._part = part
         self.__body = None
+
+    def configure_for_numbered_lists(self):
+        """Configures the underlying document such that you
+        can include multiple numbered lists with correct numbers.
+
+        If you wish to change the appearance of the resultant styles
+        then you should override this method with your own styling choices
+        as these are shipped 'as is' and are generally good enough.
+        """
+        STYP = docx.enum.style.WD_STYLE_TYPE
+        num_xml = self.part.numbering_part.element
+        next_abstract_id = max([J.abstractNumId for J in num_xml.abstractNum_lst]) + 1
+        l = num_xml._new_abstractNum()
+        l.abstractNumId = next_abstract_id
+        l.add_multiLevelType().val = "multilevel"
+
+        formats = {
+            0: "decimal",
+            1: "decimal",
+            2: "decimal",
+        }
+        text_fmts = {
+            0: "%1.",
+            1: "%1.%2.",
+            2: "%1.%2.%3.",
+        }
+        starts = {0: 1, 1: 1, 2: 1}
+        restarts = {0: False, 1: False, 2: 1}
+        hosts = {0: "List Number", 1: "List Number 2", 2: "List Number 3"}
+
+        num_xml.abstractNum_lst[-1].addnext(l)
+        nNum = num_xml.add_num(next_abstract_id)
+
+        for i in range(3):
+            lvl = l.add_lvl()
+            lvl.ilvl = i
+            lvl.add_start().val = starts[i]
+            lvl.add_numFmt().val = formats[i]
+            if restarts[i]:
+                lvl.add_lvlRestart().val = restarts[i]
+            lvl.add_lvlText().val = text_fmts[i]
+            lvl.add_suff().val = "tab"
+            p_pr = lvl.add_pPr()
+            p_pr.ind_left = simpletypes.Twips(i * 720)
+            ho = self.styles.get_by_id(
+                self.styles.get_style_id(hosts[i], STYP.PARAGRAPH), STYP.PARAGRAPH
+            ).element.pPr.numPr
+            ho.get_or_add_ilvl().val = i
+            ho.get_or_add_numId().val = nNum.numId
 
     def add_heading(self, text: str = "", level: int = 1):
         """Return a heading paragraph newly added to the end of the document.
