@@ -8,6 +8,10 @@ readme = "README.md"
 packages = [{include = "docx", from="src"}]
 
 
+[project.urls]
+Homepage = "https://github.com/skelmis/python-docx"
+Documentation = "https://skelmis-docx.readthedocs.io/en/latest/"
+
 [tool.poetry.dependencies]
 python = "^3.10"
 lxml = ">=3.1.0,"
