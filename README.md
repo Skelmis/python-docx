@@ -8,6 +8,7 @@ Key differences at a glance:
 - Supporting multiple numbered lists within a document
 - Supporting TOC updates within the package without the need to open the document manually
 - Supporting floating images within documents
+- Supporting the ability to transform word documents into PDF's
 
 ## Installation
 

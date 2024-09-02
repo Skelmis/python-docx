@@ -12,7 +12,6 @@ Session.vim
 poetry.lock
 
 test.py
-cat.docx
 cat.jpeg
-template.docx
 *.docx
+*.pdf
