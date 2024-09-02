@@ -40,7 +40,7 @@ class Document(ElementProxy):
         self._part = part
         self.__body = None
 
-    def configure_for_numbered_lists(self):
+    def configure_styles_for_numbered_lists(self):
         """Configures the underlying document such that you
         can include multiple numbered lists with correct numbers.
 

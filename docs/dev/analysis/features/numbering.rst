@@ -296,7 +296,7 @@ to provide a simpler way to insert numbered lists.
 .. code-block:: python
 
     d = Document()
-    d.configure_for_numbered_lists()
+    d.configure_styles_for_numbered_lists()
 
     d.add_paragraph("Sample numbered list", style="List Number")
     d.add_paragraph("Sample numbered list", style="List Number")
