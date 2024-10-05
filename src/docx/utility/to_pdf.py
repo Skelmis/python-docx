@@ -75,20 +75,26 @@ def _create_pdf_macos(docx_file: Path) -> None:
         str(Path(f"{docx_file.stem}.pdf").resolve()),
     ]
 
-    def run(command):
-        process = subprocess.Popen(command, stderr=subprocess.PIPE)
+    process = subprocess.Popen(cmd, stderr=subprocess.PIPE)
+    process.wait()
+    if process.returncode != 0:
+        msg = process.stderr.read().decode().rstrip()
+        if "application can't be found" in msg.lower():
+            raise EnvironmentError("Microsoft Word is not available.")
+        raise RuntimeError(msg)
+
+    def stderr_results(process):
         while True:
             output_line = process.stderr.readline().rstrip()
             if not output_line:
                 break
             yield output_line.decode("utf-8")
 
-    for line in run(cmd):
+    for line in stderr_results(process):
         try:
             msg = json.loads(line)
         except ValueError:
             continue
-
         if msg["result"] == "error":
             print(msg)
             sys.exit(1)
