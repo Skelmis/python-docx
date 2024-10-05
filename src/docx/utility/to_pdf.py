@@ -1,8 +1,12 @@
+import json
+import logging
 import secrets
 import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+log = logging.getLogger(__name__)
 
 
 def _update_toc_linux(docx_file: Path) -> None:
@@ -27,6 +31,25 @@ def _update_toc_linux(docx_file: Path) -> None:
     tmp_file.unlink()
 
 
+def _create_pdf_windows(docx_file: Path) -> None:
+    import win32com.client
+
+    word = win32com.client.Dispatch("Word.Application")
+    wdFormatPDF = 17
+
+    docx_filepath = docx_file
+    pdf_filepath = Path(f"{docx_file.stem}.pdf").resolve()
+    doc = word.Documents.Open(str(docx_filepath))
+    try:
+        doc.SaveAs(str(pdf_filepath), FileFormat=wdFormatPDF)
+    except:
+        raise
+    finally:
+        doc.Close(0)
+
+    word.Quit()
+
+
 def _create_pdf_linux(docx_file: Path) -> None:
     subprocess.call(
         [
@@ -38,6 +61,37 @@ def _create_pdf_linux(docx_file: Path) -> None:
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
+
+
+def _create_pdf_macos(docx_file: Path) -> None:
+    log.warning("DOCX -> PDF on mac is untested. Any issues please raise an issue.")
+    script = (Path(__file__).parent / "convert.jxa").resolve()
+    cmd = [
+        "/usr/bin/osascript",
+        "-l",
+        "JavaScript",
+        str(script),
+        str(docx_file),
+        str(Path(f"{docx_file.stem}.pdf").resolve()),
+    ]
+
+    def run(command):
+        process = subprocess.Popen(command, stderr=subprocess.PIPE)
+        while True:
+            output_line = process.stderr.readline().rstrip()
+            if not output_line:
+                break
+            yield output_line.decode("utf-8")
+
+    for line in run(cmd):
+        try:
+            msg = json.loads(line)
+        except ValueError:
+            continue
+
+        if msg["result"] == "error":
+            print(msg)
+            sys.exit(1)
 
 
 def export_libre_macro(
@@ -62,7 +116,7 @@ def update_toc(docx_file: Path | str) -> None:
     if isinstance(docx_file, str):
         docx_file = Path(docx_file)
 
-    docx_file = docx_file.absolute()
+    docx_file = docx_file.resolve().absolute()
 
     if sys.platform == "linux":
         _update_toc_linux(docx_file)
@@ -87,6 +141,8 @@ def document_to_pdf(docx_file: Path | str) -> None:
     if sys.platform == "linux":
         _create_pdf_linux(docx_file)
     elif sys.platform == "win32":
-        raise ValueError("Windows is not yet implemented yet. Consider docx2pdf for now")
+        _create_pdf_windows(docx_file)
+    elif sys.platform == "darwin":
+        _create_pdf_macos(docx_file)
     else:
         raise ValueError(f"{sys.platform} is not implemented")
