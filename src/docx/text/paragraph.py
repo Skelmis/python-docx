@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Iterator, List, cast
+from typing import TYPE_CHECKING, Iterator, List, cast, Literal
 
 from docx.enum.style import WD_STYLE_TYPE
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 from docx.oxml.text.run import CT_R
 from docx.shared import StoryChild
 from docx.styles.style import ParagraphStyle
@@ -26,6 +28,78 @@ class Paragraph(StoryChild):
     def __init__(self, p: CT_P, parent: t.ProvidesStoryPart):
         super(Paragraph, self).__init__(parent)
         self._p = self._element = p
+
+    def insert_horizontal_rule(self):
+        """Insert a horizontal rule at the bottom of the current paragraph."""
+        self._draw_bounding_line("bottom")
+
+    def draw_paragraph_border(
+        self,
+        *,
+        top: bool = False,
+        bottom: bool = False,
+        right: bool = False,
+        left: bool = False,
+    ):
+        """Draw's a line around the current paragraph corresponding the provided arguments.
+
+        Valid arguments are top, bottom, right left. All off by default.
+        """
+        if top is True:
+            self._draw_bounding_line("top")
+
+        if bottom is True:
+            self._draw_bounding_line("bottom")
+
+        if right is True:
+            self._draw_bounding_line("right")
+
+        if left is True:
+            self._draw_bounding_line("left")
+
+    def _draw_bounding_line(self, element: Literal["top", "bottom", "left", "right"]):
+        # Original sources:
+        # - https://stackoverflow.com/a/68530806/13781503
+        # - https://github.com/python-openxml/python-docx/issues/105
+        p = self._p  # p is the <w:p> XML element
+        pPr = p.get_or_add_pPr()
+        pBdr = OxmlElement("w:pBdr")
+        pPr.insert_element_before(
+            pBdr,
+            "w:shd",
+            "w:tabs",
+            "w:suppressAutoHyphens",
+            "w:kinsoku",
+            "w:wordWrap",
+            "w:overflowPunct",
+            "w:topLinePunct",
+            "w:autoSpaceDE",
+            "w:autoSpaceDN",
+            "w:bidi",
+            "w:adjustRightInd",
+            "w:snapToGrid",
+            "w:spacing",
+            "w:ind",
+            "w:contextualSpacing",
+            "w:mirrorIndents",
+            "w:suppressOverlap",
+            "w:jc",
+            "w:textDirection",
+            "w:textAlignment",
+            "w:textboxTightWrap",
+            "w:outlineLvl",
+            "w:divId",
+            "w:cnfStyle",
+            "w:rPr",
+            "w:sectPr",
+            "w:pPrChange",
+        )
+        bottom = OxmlElement(f"w:{element}")
+        bottom.set(qn("w:val"), "single")
+        bottom.set(qn("w:sz"), "6")
+        bottom.set(qn("w:space"), "1")
+        bottom.set(qn("w:color"), "auto")
+        pBdr.append(bottom)
 
     def restart_numbering(self):
         """
