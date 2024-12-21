@@ -10,6 +10,7 @@ Key differences at a glance:
 - Supporting floating images within documents
 - Supporting the ability to transform word documents into PDF's
 - Horizontal rules + paragraph bounding boxes
+- External hyperlinks
 
 ## Installation
 
