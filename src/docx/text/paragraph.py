@@ -37,7 +37,7 @@ class Paragraph(StoryChild):
         *,
         color: str | None = "0000FF",
         underline: bool = True,
-    ) -> OxmlElement:
+    ) -> Hyperlink:
         """
         A function that places an external hyperlink within a paragraph object.
 
@@ -47,7 +47,7 @@ class Paragraph(StoryChild):
         :param text: The text displayed for the url
         :param color: The color of the text displayed
         :param underline: Whether the text is underlined or not
-        :return: The hyperlink object. If you want the full object consider .hyperlinks
+        :return: The hyperlink object.
         """
         # Sourced from https://github.com/python-openxml/python-docx/issues/74#issuecomment-261169410
 
@@ -89,7 +89,7 @@ class Paragraph(StoryChild):
         hyperlink.append(new_run)
 
         self._p.append(hyperlink)
-        return hyperlink
+        return Hyperlink(hyperlink, self)
 
     def insert_horizontal_rule(self):
         """Insert a horizontal rule at the bottom of the current paragraph."""
