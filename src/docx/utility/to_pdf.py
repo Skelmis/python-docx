@@ -38,7 +38,7 @@ def _create_pdf_windows(docx_file: Path) -> None:
     wdFormatPDF = 17
 
     docx_filepath = docx_file
-    pdf_filepath = Path(f"{docx_file.stem}.pdf").resolve()
+    pdf_filepath = Path(f"{docx_file.stem}.pdf").absolute().resolve()
     doc = word.Documents.Open(str(docx_filepath))
     try:
         doc.SaveAs(str(pdf_filepath), FileFormat=wdFormatPDF)
@@ -65,7 +65,7 @@ def _create_pdf_linux(docx_file: Path) -> None:
 
 def _create_pdf_macos(docx_file: Path) -> None:
     log.warning("DOCX -> PDF on mac is untested. Any issues please raise an issue.")
-    script = (Path(__file__).parent / "convert.jxa").resolve()
+    script = (Path(__file__).parent / "convert.jxa").absolute().resolve()
     cmd = [
         "/usr/bin/osascript",
         "-l",
@@ -110,7 +110,7 @@ def export_libre_macro(
     :py:class:`Path` is where your macros live
     """
     macro_folder = macro_folder.expanduser()
-    module_file = Path(__file__).parent.resolve() / "Module1.xba"
+    module_file = Path(__file__).parent.absolute().resolve() / "Module1.xba"
     shutil.copy(module_file, macro_folder)
 
 
@@ -122,7 +122,7 @@ def update_toc(docx_file: Path | str) -> None:
     if isinstance(docx_file, str):
         docx_file = Path(docx_file)
 
-    docx_file = docx_file.resolve().absolute()
+    docx_file = docx_file.absolute().resolve()
 
     if sys.platform == "linux":
         _update_toc_linux(docx_file)
