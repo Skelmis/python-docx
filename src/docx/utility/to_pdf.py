@@ -51,16 +51,26 @@ def _create_pdf_windows(docx_file: Path) -> None:
 
 
 def _create_pdf_linux(docx_file: Path) -> None:
-    subprocess.call(
-        [
-            "libreoffice",
-            "--convert-to",
-            "pdf",
-            str(docx_file),
-        ],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
+    try:
+        subprocess.call(
+            [
+                "libreoffice",
+                "--convert-to",
+                "pdf",
+                str(docx_file),
+            ],
+            timeout=5,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except subprocess.TimeoutExpired:
+        # New versions of LibreOffice appear to
+        # hang even after the PDF are created hence
+        # why we enforce a process timeout
+        log.debug(
+            "DOCX to PDF call timed out after 5 seconds. "
+            "This is likely fine, but if not please open an issue."
+        )
 
 
 def _create_pdf_macos(docx_file: Path) -> None:
