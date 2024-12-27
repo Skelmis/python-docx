@@ -63,7 +63,6 @@ rich==13.7.1
 ruff==0.5.7
 SecretStorage==3.3.3
 six==1.16.0
--e git+https://github.com/Skelmis/python-docx.git@85bab9569bc48b9b3565f7c83129c003df05b2b3#egg=skelmis_docx
 snowballstemmer==2.2.0
 Sphinx==8.0.2
 sphinxcontrib-applehelp==2.0.0
