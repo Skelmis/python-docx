@@ -13,4 +13,3 @@ Docx2pdf
 
 .. autofunction:: docx.utility.update_toc
 
-.. autofunction:: docx.utility.document_to_pdf

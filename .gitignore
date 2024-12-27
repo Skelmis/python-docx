@@ -11,6 +11,7 @@ Session.vim
 .idea
 poetry.lock
 
+!src/docx/templates/default.docx
 test.py
 cat.jpeg
 *.docx
