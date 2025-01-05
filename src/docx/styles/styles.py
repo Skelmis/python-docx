@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import overload
 from warnings import warn
 
 from docx.enum.style import WD_STYLE_TYPE
@@ -9,7 +10,14 @@ from docx.oxml.styles import CT_Styles
 from docx.shared import ElementProxy
 from docx.styles import BabelFish
 from docx.styles.latent import LatentStyles
-from docx.styles.style import BaseStyle, StyleFactory
+from docx.styles.style import (
+    BaseStyle,
+    StyleFactory,
+    ParagraphStyle,
+    CharacterStyle,
+    _TableStyle,
+    _NumberingStyle,
+)
 
 
 class Styles(ElementProxy):
@@ -52,7 +60,39 @@ class Styles(ElementProxy):
     def __len__(self):
         return len(self._element.style_lst)
 
-    def add_style(self, name, style_type, builtin=False):
+    @overload
+    def add_style(
+        self,
+        name,
+        builtin,
+        style_type=WD_STYLE_TYPE.PARAGRAPH,
+    ) -> ParagraphStyle: ...
+
+    @overload
+    def add_style(
+        self,
+        name,
+        builtin,
+        style_type=WD_STYLE_TYPE.CHARACTER,
+    ) -> CharacterStyle: ...
+
+    @overload
+    def add_style(
+        self,
+        name,
+        builtin,
+        style_type=WD_STYLE_TYPE.TABLE,
+    ) -> _TableStyle: ...
+
+    @overload
+    def add_style(
+        self,
+        name,
+        builtin,
+        style_type=WD_STYLE_TYPE.LIST,
+    ) -> _NumberingStyle: ...
+
+    def add_style(self, name, style_type: WD_STYLE_TYPE, builtin=False) -> BaseStyle:
         """Return a newly added style object of `style_type` and identified by `name`.
 
         A builtin style can be defined by passing True for the optional `builtin`

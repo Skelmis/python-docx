@@ -93,7 +93,7 @@ class Paragraph(StoryChild):
 
     def insert_horizontal_rule(self):
         """Insert a horizontal rule at the bottom of the current paragraph."""
-        self._draw_bounding_line("bottom")
+        self._draw_bounding_line(bottom=True)
 
     def draw_paragraph_border(
         self,
@@ -107,19 +107,17 @@ class Paragraph(StoryChild):
 
         Valid arguments are top, bottom, right left. All off by default.
         """
-        if top is True:
-            self._draw_bounding_line("top")
+        self._draw_bounding_line(top=top, bottom=bottom, right=right, left=left)
 
-        if bottom is True:
-            self._draw_bounding_line("bottom")
-
-        if right is True:
-            self._draw_bounding_line("right")
-
-        if left is True:
-            self._draw_bounding_line("left")
-
-    def _draw_bounding_line(self, element: Literal["top", "bottom", "left", "right"]):
+    # noinspection DuplicatedCode
+    def _draw_bounding_line(
+        self,
+        *,
+        top: bool = False,
+        bottom: bool = False,
+        right: bool = False,
+        left: bool = False,
+    ):
         # Original sources:
         # - https://stackoverflow.com/a/68530806/13781503
         # - https://github.com/python-openxml/python-docx/issues/105
@@ -156,12 +154,37 @@ class Paragraph(StoryChild):
             "w:sectPr",
             "w:pPrChange",
         )
-        bottom = OxmlElement(f"w:{element}")
-        bottom.set(qn("w:val"), "single")
-        bottom.set(qn("w:sz"), "6")
-        bottom.set(qn("w:space"), "1")
-        bottom.set(qn("w:color"), "auto")
-        pBdr.append(bottom)
+        if top:
+            top_s = OxmlElement(f"w:top")
+            top_s.set(qn("w:val"), "single")
+            top_s.set(qn("w:sz"), "6")
+            top_s.set(qn("w:space"), "1")
+            top_s.set(qn("w:color"), "auto")
+            pBdr.append(top_s)
+
+        if bottom:
+            bottom_s = OxmlElement(f"w:bottom")
+            bottom_s.set(qn("w:val"), "single")
+            bottom_s.set(qn("w:sz"), "6")
+            bottom_s.set(qn("w:space"), "1")
+            bottom_s.set(qn("w:color"), "auto")
+            pBdr.append(bottom_s)
+
+        if left:
+            left_s = OxmlElement(f"w:left")
+            left_s.set(qn("w:val"), "single")
+            left_s.set(qn("w:sz"), "6")
+            left_s.set(qn("w:space"), "1")
+            left_s.set(qn("w:color"), "auto")
+            pBdr.append(left_s)
+
+        if right:
+            right_s = OxmlElement(f"w:right")
+            right_s.set(qn("w:val"), "single")
+            right_s.set(qn("w:sz"), "6")
+            right_s.set(qn("w:space"), "1")
+            right_s.set(qn("w:color"), "auto")
+            pBdr.append(right_s)
 
     def restart_numbering(self):
         """
