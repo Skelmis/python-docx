@@ -2,11 +2,11 @@
 
 import pytest
 
-from docx import Document
-from docx.blkcntnr import BlockItemContainer
-from docx.shared import Inches
-from docx.table import Table
-from docx.text.paragraph import Paragraph
+from skelmis.docx import Document
+from skelmis.docx.blkcntnr import BlockItemContainer
+from skelmis.docx.shared import Inches
+from skelmis.docx.table import Table
+from skelmis.docx.text.paragraph import Paragraph
 
 from .unitutil.cxml import element, xml
 from .unitutil.file import snippet_seq, test_file

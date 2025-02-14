@@ -2,10 +2,10 @@
 
 import pytest
 
-from docx.image.image import Image
-from docx.opc.packuri import PackURI
-from docx.package import ImageParts, Package
-from docx.parts.image import ImagePart
+from skelmis.docx.image.image import Image
+from skelmis.docx.opc.packuri import PackURI
+from skelmis.docx.package import ImageParts, Package
+from skelmis.docx.parts.image import ImagePart
 
 from .unitutil.file import docx_path
 from .unitutil.mock import class_mock, instance_mock, method_mock, property_mock
@@ -124,7 +124,7 @@ class DescribeImageParts:
 
     @pytest.fixture
     def Image_(self, request):
-        return class_mock(request, "docx.package.Image")
+        return class_mock(request, "skelmis.docx.package.Image")
 
     @pytest.fixture
     def image_(self, request):
@@ -132,7 +132,7 @@ class DescribeImageParts:
 
     @pytest.fixture
     def ImagePart_(self, request):
-        return class_mock(request, "docx.package.ImagePart")
+        return class_mock(request, "skelmis.docx.package.ImagePart")
 
     @pytest.fixture
     def image_part_(self, request):

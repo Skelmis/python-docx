@@ -5,8 +5,7 @@ description = "Create, read, and update Microsoft Word .docx files."
 authors = ["Skelmis <skelmis.craft@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "docx", from="src"}]
-
+packages = [{include = "skelmis/docx", from="src"}]
 
 [project.urls]
 Homepage = "https://github.com/skelmis/python-docx"
@@ -51,7 +50,7 @@ reportImportCycles = true
 reportUnnecessaryCast = true
 reportUnnecessaryTypeIgnoreComment = true
 stubPath = "./typings"
-typeCheckingMode = "strict"
+typeCheckingMode = "stri ct"
 verboseOutput = true
 
 [tool.pytest.ini_options]

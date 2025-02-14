@@ -2,14 +2,14 @@
 
 from behave import given, then, when
 
-from docx import Document
-from docx.enum.section import WD_ORIENT, WD_SECTION
-from docx.section import Sections
-from docx.shape import InlineShapes
-from docx.shared import Inches
-from docx.styles.styles import Styles
-from docx.table import Table
-from docx.text.paragraph import Paragraph
+from skelmis.docx import Document
+from skelmis.docx.enum.section import WD_ORIENT, WD_SECTION
+from skelmis.docx.section import Sections
+from skelmis.docx.shape import InlineShapes
+from skelmis.docx.shared import Inches
+from skelmis.docx.styles.styles import Styles
+from skelmis.docx.table import Table
+from skelmis.docx.text.paragraph import Paragraph
 
 from helpers import test_docx, test_file
 

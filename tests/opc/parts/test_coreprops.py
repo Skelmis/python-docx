@@ -6,10 +6,10 @@ import datetime as dt
 
 import pytest
 
-from docx.opc.coreprops import CoreProperties
-from docx.opc.package import OpcPackage
-from docx.opc.packuri import PackURI
-from docx.opc.parts.coreprops import CorePropertiesPart
+from skelmis.docx.opc.coreprops import CoreProperties
+from skelmis.docx.opc.package import OpcPackage
+from skelmis.docx.opc.packuri import PackURI
+from skelmis.docx.opc.parts.coreprops import CorePropertiesPart
 
 from ...unitutil.cxml import element
 from ...unitutil.mock import FixtureRequest, Mock, class_mock, instance_mock
@@ -46,7 +46,7 @@ class DescribeCorePropertiesPart:
 
     @pytest.fixture
     def CoreProperties_(self, request: FixtureRequest):
-        return class_mock(request, "docx.opc.parts.coreprops.CoreProperties")
+        return class_mock(request, "skelmis.docx.opc.parts.coreprops.CoreProperties")
 
     @pytest.fixture
     def package_(self, request: FixtureRequest):

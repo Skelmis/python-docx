@@ -9,8 +9,8 @@ Specifies a built-in Microsoft Word style.
 
 Example::
 
-    from docx import Document
-    from docx.enum.style import WD_STYLE
+    from skelmis.docx import Document
+    from skelmis.docx.enum.style import WD_STYLE
 
     document = Document()
     styles = document.styles

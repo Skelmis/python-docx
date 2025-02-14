@@ -2,9 +2,9 @@
 
 import pytest
 
-import docx
-from docx.api import Document
-from docx.opc.constants import CONTENT_TYPE as CT
+import skelmis.docx
+from skelmis.docx.api import Document
+from skelmis.docx.opc.constants import CONTENT_TYPE as CT
 
 from .unitutil.mock import class_mock, function_mock, instance_mock
 
@@ -56,12 +56,12 @@ class DescribeDocument:
 
     @pytest.fixture
     def _default_docx_path_(self, request):
-        return function_mock(request, "docx.api._default_docx_path")
+        return function_mock(request, "skelmis.docx.api._default_docx_path")
 
     @pytest.fixture
     def document_(self, request):
-        return instance_mock(request, docx.document.Document)
+        return instance_mock(request, skelmis.docx.document.Document)
 
     @pytest.fixture
     def Package_(self, request):
-        return class_mock(request, "docx.api.Package")
+        return class_mock(request, "skelmis.docx.api.Package")

@@ -4,10 +4,10 @@ import io
 
 import pytest
 
-from docx.image.constants import MIME_TYPE, PNG_CHUNK_TYPE
-from docx.image.exceptions import InvalidImageStreamError
-from docx.image.helpers import BIG_ENDIAN, StreamReader
-from docx.image.png import (
+from skelmis.docx.image.constants import MIME_TYPE, PNG_CHUNK_TYPE
+from skelmis.docx.image.exceptions import InvalidImageStreamError
+from skelmis.docx.image.helpers import BIG_ENDIAN, StreamReader
+from skelmis.docx.image.png import (
     Png,
     _Chunk,
     _ChunkFactory,
@@ -59,7 +59,7 @@ class DescribePng:
 
     @pytest.fixture
     def _PngParser_(self, request, png_parser_):
-        _PngParser_ = class_mock(request, "docx.image.png._PngParser")
+        _PngParser_ = class_mock(request, "skelmis.docx.image.png._PngParser")
         _PngParser_.parse.return_value = png_parser_
         return _PngParser_
 
@@ -101,7 +101,7 @@ class Describe_PngParser:
 
     @pytest.fixture
     def _Chunks_(self, request, chunks_):
-        _Chunks_ = class_mock(request, "docx.image.png._Chunks")
+        _Chunks_ = class_mock(request, "skelmis.docx.image.png._Chunks")
         _Chunks_.from_stream.return_value = chunks_
         return _Chunks_
 
@@ -181,7 +181,7 @@ class Describe_Chunks:
 
     @pytest.fixture
     def _ChunkParser_(self, request, chunk_parser_):
-        _ChunkParser_ = class_mock(request, "docx.image.png._ChunkParser")
+        _ChunkParser_ = class_mock(request, "skelmis.docx.image.png._ChunkParser")
         _ChunkParser_.from_stream.return_value = chunk_parser_
         return _ChunkParser_
 
@@ -271,7 +271,7 @@ class Describe_ChunkParser:
 
     @pytest.fixture
     def _ChunkFactory_(self, request, chunk_lst_):
-        return function_mock(request, "docx.image.png._ChunkFactory", side_effect=chunk_lst_)
+        return function_mock(request, "skelmis.docx.image.png._ChunkFactory", side_effect=chunk_lst_)
 
     @pytest.fixture
     def chunk_lst_(self, chunk_, chunk_2_):
@@ -307,7 +307,7 @@ class Describe_ChunkParser:
 
     @pytest.fixture
     def StreamReader_(self, request, stream_rdr_):
-        return class_mock(request, "docx.image.png.StreamReader", return_value=stream_rdr_)
+        return class_mock(request, "skelmis.docx.image.png.StreamReader", return_value=stream_rdr_)
 
     @pytest.fixture
     def stream_(self, request):
@@ -346,7 +346,7 @@ class Describe_ChunkFactory:
 
     @pytest.fixture
     def _Chunk_(self, request, chunk_):
-        _Chunk_ = class_mock(request, "docx.image.png._Chunk")
+        _Chunk_ = class_mock(request, "skelmis.docx.image.png._Chunk")
         _Chunk_.from_offset.return_value = chunk_
         return _Chunk_
 
@@ -356,7 +356,7 @@ class Describe_ChunkFactory:
 
     @pytest.fixture
     def _IHDRChunk_(self, request, ihdr_chunk_):
-        _IHDRChunk_ = class_mock(request, "docx.image.png._IHDRChunk")
+        _IHDRChunk_ = class_mock(request, "skelmis.docx.image.png._IHDRChunk")
         _IHDRChunk_.from_offset.return_value = ihdr_chunk_
         return _IHDRChunk_
 
@@ -366,7 +366,7 @@ class Describe_ChunkFactory:
 
     @pytest.fixture
     def _pHYsChunk_(self, request, phys_chunk_):
-        _pHYsChunk_ = class_mock(request, "docx.image.png._pHYsChunk")
+        _pHYsChunk_ = class_mock(request, "skelmis.docx.image.png._pHYsChunk")
         _pHYsChunk_.from_offset.return_value = phys_chunk_
         return _pHYsChunk_
 

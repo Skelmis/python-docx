@@ -6,12 +6,12 @@ from __future__ import annotations
 
 import pytest
 
-from docx.opc.constants import CONTENT_TYPE as CT
-from docx.opc.packuri import PackURI
-from docx.opc.part import Part
-from docx.opc.phys_pkg import _ZipPkgWriter
-from docx.opc.pkgwriter import PackageWriter, _ContentTypesItem
-from docx.opc.rel import Relationships
+from skelmis.docx.opc.constants import CONTENT_TYPE as CT
+from skelmis.docx.opc.packuri import PackURI
+from skelmis.docx.opc.part import Part
+from skelmis.docx.opc.phys_pkg import _ZipPkgWriter
+from skelmis.docx.opc.pkgwriter import PackageWriter, _ContentTypesItem
+from skelmis.docx.opc.rel import Relationships
 
 from ..unitutil.mock import (
     FixtureRequest,
@@ -87,7 +87,7 @@ class DescribePackageWriter:
 
     @pytest.fixture
     def _ContentTypesItem_(self, request: FixtureRequest, cti_):
-        _ContentTypesItem_ = class_mock(request, "docx.opc.pkgwriter._ContentTypesItem")
+        _ContentTypesItem_ = class_mock(request, "skelmis.docx.opc.pkgwriter._ContentTypesItem")
         _ContentTypesItem_.from_parts.return_value = cti_
         return _ContentTypesItem_
 
@@ -105,7 +105,7 @@ class DescribePackageWriter:
 
     @pytest.fixture
     def PhysPkgWriter_(self):
-        p = patch("docx.opc.pkgwriter.PhysPkgWriter")
+        p = patch("skelmis.docx.opc.pkgwriter.PhysPkgWriter")
         yield p.start()
         p.stop()
 

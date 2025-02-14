@@ -7,7 +7,7 @@ from typing import Dict, Tuple
 from behave import given, then
 from behave.runner import Context
 
-from docx import Document
+from skelmis.docx import Document
 
 from helpers import test_docx
 

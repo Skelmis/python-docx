@@ -8,20 +8,20 @@ from typing import cast
 
 import pytest
 
-from docx.document import Document
-from docx.enum.style import WD_STYLE_TYPE
-from docx.enum.table import (
+from skelmis.docx.document import Document
+from skelmis.docx.enum.style import WD_STYLE_TYPE
+from skelmis.docx.enum.table import (
     WD_ALIGN_VERTICAL,
     WD_ROW_HEIGHT,
     WD_TABLE_ALIGNMENT,
     WD_TABLE_DIRECTION,
 )
-from docx.oxml.parser import parse_xml
-from docx.oxml.table import CT_Row, CT_Tbl, CT_TblGridCol, CT_Tc
-from docx.parts.document import DocumentPart
-from docx.shared import Emu, Inches, Length
-from docx.table import Table, _Cell, _Column, _Columns, _Row, _Rows
-from docx.text.paragraph import Paragraph
+from skelmis.docx.oxml.parser import parse_xml
+from skelmis.docx.oxml.table import CT_Row, CT_Tbl, CT_TblGridCol, CT_Tc
+from skelmis.docx.parts.document import DocumentPart
+from skelmis.docx.shared import Emu, Inches, Length
+from skelmis.docx.table import Table, _Cell, _Column, _Columns, _Row, _Rows
+from skelmis.docx.text.paragraph import Paragraph
 
 from .unitutil.cxml import element, xml
 from .unitutil.file import snippet_seq

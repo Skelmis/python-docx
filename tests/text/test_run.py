@@ -8,14 +8,14 @@ from typing import Any, List, cast
 
 import pytest
 
-from docx import types as t
-from docx.enum.style import WD_STYLE_TYPE
-from docx.enum.text import WD_BREAK, WD_UNDERLINE
-from docx.oxml.text.run import CT_R
-from docx.parts.document import DocumentPart
-from docx.shape import InlineShape
-from docx.text.font import Font
-from docx.text.run import Run
+from skelmis.docx import types as t
+from skelmis.docx.enum.style import WD_STYLE_TYPE
+from skelmis.docx.enum.text import WD_BREAK, WD_UNDERLINE
+from skelmis.docx.oxml.text.run import CT_R
+from skelmis.docx.parts.document import DocumentPart
+from skelmis.docx.shape import InlineShape
+from skelmis.docx.text.font import Font
+from skelmis.docx.text.run import Run
 
 from ..unitutil.cxml import element, xml
 from ..unitutil.mock import class_mock, instance_mock, property_mock
@@ -380,7 +380,7 @@ class DescribeRun:
 
     @pytest.fixture
     def Font_(self, request, font_):
-        return class_mock(request, "docx.text.run.Font", return_value=font_)
+        return class_mock(request, "skelmis.docx.text.run.Font", return_value=font_)
 
     @pytest.fixture
     def font_(self, request):
@@ -388,7 +388,7 @@ class DescribeRun:
 
     @pytest.fixture
     def InlineShape_(self, request):
-        return class_mock(request, "docx.text.run.InlineShape")
+        return class_mock(request, "skelmis.docx.text.run.InlineShape")
 
     @pytest.fixture
     def part_prop_(self, request, document_part_):
@@ -400,4 +400,4 @@ class DescribeRun:
 
     @pytest.fixture
     def Text_(self, request):
-        return class_mock(request, "docx.text.run._Text")
+        return class_mock(request, "skelmis.docx.text.run._Text")

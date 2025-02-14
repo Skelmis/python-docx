@@ -9,7 +9,7 @@ Specifies the start type of a section break.
 
 Example::
 
-    from docx.enum.section import WD_SECTION
+    from skelmis.docx.enum.section import WD_SECTION
 
     section = document.sections[0]
     section.start_type = WD_SECTION.NEW_PAGE

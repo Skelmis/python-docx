@@ -11,7 +11,7 @@ Opening a document
 
 First thing you'll need is a document to work on. The easiest way is this::
 
-    from docx import Document
+    from skelmis.docx import Document
 
     document = Document()
 
@@ -199,7 +199,7 @@ page.
 To get the image the size you want, you can specify either its width or height
 in convenient units, like inches or centimeters::
 
-    from docx.shared import Inches
+    from skelmis.docx.shared import Inches
 
     document.add_picture('image-filename.png', width=Inches(1.0))
 

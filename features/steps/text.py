@@ -5,12 +5,12 @@ import hashlib
 from behave import given, then, when
 from behave.runner import Context
 
-from docx import Document
-from docx.enum.text import WD_BREAK, WD_UNDERLINE
-from docx.oxml.ns import nsdecls, qn
-from docx.oxml.parser import parse_xml
-from docx.text.font import Font
-from docx.text.run import Run
+from skelmis.docx import Document
+from skelmis.docx.enum.text import WD_BREAK, WD_UNDERLINE
+from skelmis.docx.oxml.ns import nsdecls, qn
+from skelmis.docx.oxml.parser import parse_xml
+from skelmis.docx.text.font import Font
+from skelmis.docx.text.run import Run
 
 from helpers import test_docx, test_file, test_text
 

@@ -5,15 +5,15 @@
 from behave import given, then, when
 from behave.runner import Context
 
-from docx import Document
-from docx.enum.table import (
+from skelmis.docx import Document
+from skelmis.docx.enum.table import (
     WD_ALIGN_VERTICAL,
     WD_ROW_HEIGHT_RULE,
     WD_TABLE_ALIGNMENT,
     WD_TABLE_DIRECTION,
 )
-from docx.shared import Inches
-from docx.table import Table, _Cell, _Column, _Columns, _Row, _Rows
+from skelmis.docx.shared import Inches
+from skelmis.docx.table import Table, _Cell, _Column, _Columns, _Row, _Rows
 
 from helpers import test_docx
 

@@ -9,7 +9,7 @@ Specifies the vertical alignment of text in one or more cells of a table.
 
 Example::
 
-    from docx.enum.table import WD_ALIGN_VERTICAL
+    from skelmis.docx.enum.table import WD_ALIGN_VERTICAL
 
     table = document.add_table(3, 3)
     table.cell(0, 0).vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM

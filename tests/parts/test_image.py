@@ -2,13 +2,13 @@
 
 import pytest
 
-from docx.image.image import Image
-from docx.opc.constants import CONTENT_TYPE as CT
-from docx.opc.constants import RELATIONSHIP_TYPE as RT
-from docx.opc.packuri import PackURI
-from docx.opc.part import PartFactory
-from docx.package import Package
-from docx.parts.image import ImagePart
+from skelmis.docx.image.image import Image
+from skelmis.docx.opc.constants import CONTENT_TYPE as CT
+from skelmis.docx.opc.constants import RELATIONSHIP_TYPE as RT
+from skelmis.docx.opc.packuri import PackURI
+from skelmis.docx.opc.part import PartFactory
+from skelmis.docx.package import Package
+from skelmis.docx.parts.image import ImagePart
 
 from ..unitutil.file import test_file
 from ..unitutil.mock import ANY, initializer_mock, instance_mock, method_mock

@@ -9,7 +9,7 @@ import enum
 
 import pytest
 
-from docx.enum.base import BaseXmlEnum
+from skelmis.docx.enum.base import BaseXmlEnum
 
 
 class SomeXmlAttr(BaseXmlEnum):

@@ -2,7 +2,7 @@
 
 import pytest
 
-from docx.styles.latent import LatentStyles, _LatentStyle
+from skelmis.docx.styles.latent import LatentStyles, _LatentStyle
 
 from ..unitutil.cxml import element, xml
 

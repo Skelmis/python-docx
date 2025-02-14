@@ -2,8 +2,8 @@
 
 import pytest
 
-from docx.oxml.numbering import CT_Numbering
-from docx.parts.numbering import NumberingPart, _NumberingDefinitions
+from skelmis.docx.oxml.numbering import CT_Numbering
+from skelmis.docx.parts.numbering import NumberingPart, _NumberingDefinitions
 
 from ..oxml.unitdata.numbering import a_num, a_numbering
 from ..unitutil.mock import class_mock, instance_mock
@@ -39,7 +39,7 @@ class DescribeNumberingPart:
     def _NumberingDefinitions_(self, request, numbering_definitions_):
         return class_mock(
             request,
-            "docx.parts.numbering._NumberingDefinitions",
+            "skelmis.docx.parts.numbering._NumberingDefinitions",
             return_value=numbering_definitions_,
         )
 

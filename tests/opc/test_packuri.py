@@ -2,7 +2,7 @@
 
 import pytest
 
-from docx.opc.packuri import PackURI
+from skelmis.docx.opc.packuri import PackURI
 
 
 class DescribePackURI:

@@ -7,9 +7,9 @@ from typing import Any
 from behave import given, then, when
 from behave.runner import Context
 
-from docx import Document
-from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
-from docx.text.parfmt import ParagraphFormat
+from skelmis.docx import Document
+from skelmis.docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from skelmis.docx.text.parfmt import ParagraphFormat
 
 from helpers import saved_docx_path, test_docx, test_text
 

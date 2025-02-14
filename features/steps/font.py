@@ -2,11 +2,11 @@
 
 from behave import given, then, when
 
-from docx import Document
-from docx.dml.color import ColorFormat
-from docx.enum.dml import MSO_COLOR_TYPE, MSO_THEME_COLOR
-from docx.enum.text import WD_COLOR_INDEX, WD_UNDERLINE
-from docx.shared import RGBColor
+from skelmis.docx import Document
+from skelmis.docx.dml.color import ColorFormat
+from skelmis.docx.enum.dml import MSO_COLOR_TYPE, MSO_THEME_COLOR
+from skelmis.docx.enum.text import WD_COLOR_INDEX, WD_UNDERLINE
+from skelmis.docx.shared import RGBColor
 
 from helpers import test_docx
 

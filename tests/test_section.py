@@ -8,16 +8,16 @@ from typing import cast
 
 import pytest
 
-from docx import Document
-from docx.enum.section import WD_HEADER_FOOTER, WD_ORIENTATION, WD_SECTION
-from docx.oxml.document import CT_Document
-from docx.oxml.section import CT_SectPr
-from docx.parts.document import DocumentPart
-from docx.parts.hdrftr import FooterPart, HeaderPart
-from docx.section import Section, Sections, _BaseHeaderFooter, _Footer, _Header
-from docx.shared import Inches, Length
-from docx.table import Table
-from docx.text.paragraph import Paragraph
+from skelmis.docx import Document
+from skelmis.docx.enum.section import WD_HEADER_FOOTER, WD_ORIENTATION, WD_SECTION
+from skelmis.docx.oxml.document import CT_Document
+from skelmis.docx.oxml.section import CT_SectPr
+from skelmis.docx.parts.document import DocumentPart
+from skelmis.docx.parts.hdrftr import FooterPart, HeaderPart
+from skelmis.docx.section import Section, Sections, _BaseHeaderFooter, _Footer, _Header
+from skelmis.docx.shared import Inches, Length
+from skelmis.docx.table import Table
+from skelmis.docx.text.paragraph import Paragraph
 
 from .unitutil.cxml import element, xml
 from .unitutil.file import test_file
@@ -107,7 +107,7 @@ class DescribeSections:
 
     @pytest.fixture
     def Section_(self, request: FixtureRequest):
-        return class_mock(request, "docx.section.Section")
+        return class_mock(request, "skelmis.docx.section.Section")
 
     @pytest.fixture
     def section_(self, request: FixtureRequest):
@@ -528,7 +528,7 @@ class DescribeSection:
 
     @pytest.fixture
     def _Footer_(self, request: FixtureRequest):
-        return class_mock(request, "docx.section._Footer")
+        return class_mock(request, "skelmis.docx.section._Footer")
 
     @pytest.fixture
     def footer_(self, request: FixtureRequest):
@@ -536,7 +536,7 @@ class DescribeSection:
 
     @pytest.fixture
     def _Header_(self, request: FixtureRequest):
-        return class_mock(request, "docx.section._Header")
+        return class_mock(request, "skelmis.docx.section._Header")
 
     @pytest.fixture
     def header_(self, request: FixtureRequest):
@@ -745,7 +745,7 @@ class Describe_Footer:
         prior_sectPr, sectPr = doc_elm[0], doc_elm[1]
         footer = _Footer(sectPr, document_part_, WD_HEADER_FOOTER.EVEN_PAGE)
         # ---mock must occur after construction of "real" footer---
-        _Footer_ = class_mock(request, "docx.section._Footer", return_value=footer_)
+        _Footer_ = class_mock(request, "skelmis.docx.section._Footer", return_value=footer_)
 
         prior_footer = footer._prior_headerfooter
 
@@ -830,7 +830,7 @@ class Describe_Header:
         prior_sectPr, sectPr = doc_elm[0], doc_elm[1]
         header = _Header(sectPr, document_part_, WD_HEADER_FOOTER.PRIMARY)
         # ---mock must occur after construction of "real" header---
-        _Header_ = class_mock(request, "docx.section._Header", return_value=header_)
+        _Header_ = class_mock(request, "skelmis.docx.section._Header", return_value=header_)
 
         prior_header = header._prior_headerfooter
 

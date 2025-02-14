@@ -4,8 +4,8 @@ import io
 
 import pytest
 
-from docx.image.bmp import Bmp
-from docx.image.constants import MIME_TYPE
+from skelmis.docx.image.bmp import Bmp
+from skelmis.docx.image.constants import MIME_TYPE
 
 from ..unitutil.mock import ANY, initializer_mock
 

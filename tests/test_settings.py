@@ -2,7 +2,7 @@
 
 import pytest
 
-from docx.settings import Settings
+from skelmis.docx.settings import Settings
 
 from .unitutil.cxml import element, xml
 

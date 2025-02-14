@@ -223,8 +223,8 @@ question referred to above.
 
     #!/usr/bin/python
 
-    from docx import Document
-    from docx import oxml
+    from skelmis.docx import Document
+    from skelmis.docx import oxml
 
 
     d = Document()

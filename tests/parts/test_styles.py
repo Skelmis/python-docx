@@ -2,11 +2,11 @@
 
 import pytest
 
-from docx.opc.constants import CONTENT_TYPE as CT
-from docx.opc.package import OpcPackage
-from docx.oxml.styles import CT_Styles
-from docx.parts.styles import StylesPart
-from docx.styles.styles import Styles
+from skelmis.docx.opc.constants import CONTENT_TYPE as CT
+from skelmis.docx.opc.package import OpcPackage
+from skelmis.docx.oxml.styles import CT_Styles
+from skelmis.docx.parts.styles import StylesPart
+from skelmis.docx.styles.styles import Styles
 
 from ..unitutil.mock import class_mock, instance_mock
 
@@ -38,7 +38,7 @@ class DescribeStylesPart:
 
     @pytest.fixture
     def Styles_(self, request, styles_):
-        return class_mock(request, "docx.parts.styles.Styles", return_value=styles_)
+        return class_mock(request, "skelmis.docx.parts.styles.Styles", return_value=styles_)
 
     @pytest.fixture
     def styles_(self, request):

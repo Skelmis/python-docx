@@ -3,8 +3,8 @@
 from behave import given, then, when
 from behave.runner import Context
 
-from docx import Document
-from docx.table import Table
+from skelmis.docx import Document
+from skelmis.docx.table import Table
 
 from helpers import test_docx
 

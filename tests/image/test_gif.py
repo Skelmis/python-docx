@@ -4,8 +4,8 @@ import io
 
 import pytest
 
-from docx.image.constants import MIME_TYPE
-from docx.image.gif import Gif
+from skelmis.docx.image.constants import MIME_TYPE
+from skelmis.docx.image.gif import Gif
 
 from ..unitutil.mock import ANY, initializer_mock
 

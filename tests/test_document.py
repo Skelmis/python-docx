@@ -9,20 +9,20 @@ from typing import cast
 
 import pytest
 
-from docx.document import Document, _Body
-from docx.enum.section import WD_SECTION
-from docx.enum.text import WD_BREAK
-from docx.opc.coreprops import CoreProperties
-from docx.oxml.document import CT_Document
-from docx.parts.document import DocumentPart
-from docx.section import Section, Sections
-from docx.settings import Settings
-from docx.shape import InlineShape, InlineShapes
-from docx.shared import Length
-from docx.styles.styles import Styles
-from docx.table import Table
-from docx.text.paragraph import Paragraph
-from docx.text.run import Run
+from skelmis.docx.document import Document, _Body
+from skelmis.docx.enum.section import WD_SECTION
+from skelmis.docx.enum.text import WD_BREAK
+from skelmis.docx.opc.coreprops import CoreProperties
+from skelmis.docx.oxml.document import CT_Document
+from skelmis.docx.parts.document import DocumentPart
+from skelmis.docx.section import Section, Sections
+from skelmis.docx.settings import Settings
+from skelmis.docx.shape import InlineShape, InlineShapes
+from skelmis.docx.shared import Length
+from skelmis.docx.styles.styles import Styles
+from skelmis.docx.table import Table
+from skelmis.docx.text.paragraph import Paragraph
+from skelmis.docx.text.run import Run
 
 from .unitutil.cxml import element, xml
 from .unitutil.mock import Mock, class_mock, instance_mock, method_mock, property_mock
@@ -291,7 +291,7 @@ class DescribeDocument:
 
     @pytest.fixture
     def _Body_(self, request, body_):
-        return class_mock(request, "docx.document._Body", return_value=body_)
+        return class_mock(request, "skelmis.docx.document._Body", return_value=body_)
 
     @pytest.fixture
     def body_(self, request):
@@ -335,7 +335,7 @@ class DescribeDocument:
 
     @pytest.fixture
     def Section_(self, request):
-        return class_mock(request, "docx.document.Section")
+        return class_mock(request, "skelmis.docx.document.Section")
 
     @pytest.fixture
     def section_(self, request):
@@ -343,7 +343,7 @@ class DescribeDocument:
 
     @pytest.fixture
     def Sections_(self, request):
-        return class_mock(request, "docx.document.Sections")
+        return class_mock(request, "skelmis.docx.document.Sections")
 
     @pytest.fixture
     def sections_(self, request):

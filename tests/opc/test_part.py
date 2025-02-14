@@ -6,11 +6,11 @@ from __future__ import annotations
 
 import pytest
 
-from docx.opc.package import OpcPackage
-from docx.opc.packuri import PackURI
-from docx.opc.part import Part, PartFactory, XmlPart
-from docx.opc.rel import Relationships, _Relationship
-from docx.oxml.xmlchemy import BaseOxmlElement
+from skelmis.docx.opc.package import OpcPackage
+from skelmis.docx.opc.packuri import PackURI
+from skelmis.docx.opc.part import Part, PartFactory, XmlPart
+from skelmis.docx.opc.rel import Relationships, _Relationship
+from skelmis.docx.oxml.xmlchemy import BaseOxmlElement
 
 from ..unitutil.cxml import element
 from ..unitutil.mock import (
@@ -174,7 +174,7 @@ class DescribePartRelationshipManagementInterface:
 
     @pytest.fixture
     def Relationships_(self, request: FixtureRequest):
-        return class_mock(request, "docx.opc.part.Relationships")
+        return class_mock(request, "skelmis.docx.opc.part.Relationships")
 
     @pytest.fixture
     def rel_(self, request: FixtureRequest):
@@ -239,7 +239,7 @@ class DescribePartFactory:
 
     @pytest.fixture
     def cls_method_fn_(self, request, cls_selector_fn_):
-        return function_mock(request, "docx.opc.part.cls_method_fn", return_value=cls_selector_fn_)
+        return function_mock(request, "skelmis.docx.opc.part.cls_method_fn", return_value=cls_selector_fn_)
 
     @pytest.fixture
     def cls_selector_fixture(
@@ -408,7 +408,7 @@ class DescribeXmlPart:
 
     @pytest.fixture
     def parse_xml_(self, request, element_):
-        return function_mock(request, "docx.opc.part.parse_xml", return_value=element_)
+        return function_mock(request, "skelmis.docx.opc.part.parse_xml", return_value=element_)
 
     @pytest.fixture
     def partname_(self, request):
@@ -420,4 +420,4 @@ class DescribeXmlPart:
 
     @pytest.fixture
     def serialize_part_xml_(self, request):
-        return function_mock(request, "docx.opc.part.serialize_part_xml")
+        return function_mock(request, "skelmis.docx.opc.part.serialize_part_xml")

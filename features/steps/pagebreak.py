@@ -5,8 +5,8 @@ from __future__ import annotations
 from behave import given, then
 from behave.runner import Context
 
-from docx import Document
-from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from skelmis.docx import Document
+from skelmis.docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 
 from helpers import test_docx
 

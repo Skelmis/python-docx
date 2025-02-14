@@ -4,7 +4,7 @@ from typing import cast
 
 import pytest
 
-from docx.oxml.text.run import CT_R
+from skelmis.docx.oxml.text.run import CT_R
 
 from ...unitutil.cxml import element, xml
 

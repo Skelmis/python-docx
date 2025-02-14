@@ -2,8 +2,8 @@
 
 from behave import given, then, when
 
-import docx
-from docx import Document
+import skelmis.docx
+from skelmis.docx import Document
 
 from helpers import test_docx
 
@@ -34,7 +34,7 @@ def when_I_call_docx_Document_with_the_path_of_a_docx_file(context):
 @then("document is a Document object")
 def then_document_is_a_Document_object(context):
     document = context.document
-    assert isinstance(document, docx.document.Document)
+    assert isinstance(document, skelmis.docx.document.Document), "whell shit"
 
 
 @then("the last paragraph contains the text I specified")

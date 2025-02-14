@@ -8,10 +8,10 @@ from typing import cast
 
 import pytest
 
-from docx.exceptions import InvalidSpanError
-from docx.oxml.parser import parse_xml
-from docx.oxml.table import CT_Row, CT_Tbl, CT_Tc
-from docx.oxml.text.paragraph import CT_P
+from skelmis.docx.exceptions import InvalidSpanError
+from skelmis.docx.oxml.parser import parse_xml
+from skelmis.docx.oxml.table import CT_Row, CT_Tbl, CT_Tc
+from skelmis.docx.oxml.text.paragraph import CT_P
 
 from ..unitutil.cxml import element, xml
 from ..unitutil.file import snippet_seq

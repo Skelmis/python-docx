@@ -60,7 +60,7 @@ set to left, centered, right, or fully justified (aligned on both the left
 and right sides) using values from the enumeration
 :ref:`WdParagraphAlignment`::
 
-    >>> from docx.enum.text import WD_ALIGN_PARAGRAPH
+    >>> from skelmis.docx.enum.text import WD_ALIGN_PARAGRAPH
     >>> document = Document()
     >>> paragraph = document.add_paragraph()
     >>> paragraph_format = paragraph.paragraph_format
@@ -89,7 +89,7 @@ inherited from the style hierarchy. Assigning |None| to an indentation
 property removes any directly-applied indentation setting and restores
 inheritance from the style hierarchy::
 
-    >>> from docx.shared import Inches
+    >>> from skelmis.docx.shared import Inches
     >>> paragraph = document.add_paragraph()
     >>> paragraph_format = paragraph.paragraph_format
 
@@ -104,7 +104,7 @@ inheritance from the style hierarchy::
 
 Right-side indent works in a similar way::
 
-    >>> from docx.shared import Pt
+    >>> from skelmis.docx.shared import Pt
     >>> paragraph_format.right_indent
     None
     >>> paragraph_format.right_indent = Pt(24)
@@ -159,7 +159,7 @@ Alignment defaults to left, but may be specified by providing a member of the
 but may be specified by providing a member of the :ref:`WdTabLeader`
 enumeration::
 
-    >>> from docx.enum.text import WD_TAB_ALIGNMENT, WD_TAB_LEADER
+    >>> from skelmis.docx.enum.text import WD_TAB_ALIGNMENT, WD_TAB_LEADER
     >>> tab_stop = tab_stops.add_tab_stop(Inches(1.5), WD_TAB_ALIGNMENT.RIGHT, WD_TAB_LEADER.DOTS)
     >>> print(tab_stop.alignment)
     RIGHT (2)
@@ -217,7 +217,7 @@ distance. A |float| indicates a number of line heights. |None| indicates line
 spacing is inherited. :attr:`~.ParagraphFormat.line_spacing_rule` is a member
 of the :ref:`WdLineSpacing` enumeration or |None|::
 
-    >>> from docx.shared import Length
+    >>> from skelmis.docx.shared import Length
     >>> paragraph_format.line_spacing
     None
     >>> paragraph_format.line_spacing_rule
@@ -292,14 +292,14 @@ properties, see the |Font| API documentation.
 
 The font for a run can be accessed like this::
 
-    >>> from docx import Document
+    >>> from skelmis.docx import Document
     >>> document = Document()
     >>> run = document.add_paragraph().add_run()
     >>> font = run.font
 
 Typeface and size are set like this::
 
-    >>> from docx.shared import Pt
+    >>> from skelmis.docx.shared import Pt
     >>> font.name = 'Calibri'
     >>> font.size = Pt(12)
 
@@ -347,13 +347,13 @@ color, accessed via its read-only :attr:`~.Font.color` property.
 
 Apply a specific RGB color to a font::
 
-    >>> from docx.shared import RGBColor
+    >>> from skelmis.docx.shared import RGBColor
     >>> font.color.rgb = RGBColor(0x42, 0x24, 0xE9)
 
 A font can also be set to a theme color by assigning a member of the
 :ref:`MsoThemeColorIndex` enumeration::
 
-    >>> from docx.enum.dml import MSO_THEME_COLOR
+    >>> from skelmis.docx.enum.dml import MSO_THEME_COLOR
     >>> font.color.theme_color = MSO_THEME_COLOR.ACCENT_1
 
 A font's color can be restored to its default (inherited) value by assigning

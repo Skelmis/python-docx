@@ -2,10 +2,10 @@
 
 import pytest
 
-from docx.enum.shape import WD_INLINE_SHAPE
-from docx.oxml.ns import nsmap
-from docx.shape import InlineShape, InlineShapes
-from docx.shared import Length
+from skelmis.docx.enum.shape import WD_INLINE_SHAPE
+from skelmis.docx.oxml.ns import nsmap
+from skelmis.docx.shape import InlineShape, InlineShapes
+from skelmis.docx.shared import Length
 
 from .oxml.unitdata.dml import (
     a_blip,

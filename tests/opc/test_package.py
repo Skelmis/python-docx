@@ -6,14 +6,14 @@ from __future__ import annotations
 
 import pytest
 
-from docx.opc.constants import RELATIONSHIP_TYPE as RT
-from docx.opc.coreprops import CoreProperties
-from docx.opc.package import OpcPackage, Unmarshaller
-from docx.opc.packuri import PACKAGE_URI, PackURI
-from docx.opc.part import Part
-from docx.opc.parts.coreprops import CorePropertiesPart
-from docx.opc.pkgreader import PackageReader
-from docx.opc.rel import Relationships, _Relationship
+from skelmis.docx.opc.constants import RELATIONSHIP_TYPE as RT
+from skelmis.docx.opc.coreprops import CoreProperties
+from skelmis.docx.opc.package import OpcPackage, Unmarshaller
+from skelmis.docx.opc.packuri import PACKAGE_URI, PackURI
+from skelmis.docx.opc.part import Part
+from skelmis.docx.opc.parts.coreprops import CorePropertiesPart
+from skelmis.docx.opc.pkgreader import PackageReader
+from skelmis.docx.opc.rel import Relationships, _Relationship
 
 from ..unitutil.mock import (
     FixtureRequest,
@@ -191,7 +191,7 @@ class DescribeOpcPackage:
 
     @pytest.fixture
     def CorePropertiesPart_(self, request: FixtureRequest):
-        return class_mock(request, "docx.opc.package.CorePropertiesPart")
+        return class_mock(request, "skelmis.docx.opc.package.CorePropertiesPart")
 
     @pytest.fixture
     def core_properties_(self, request: FixtureRequest):
@@ -211,11 +211,11 @@ class DescribeOpcPackage:
 
     @pytest.fixture
     def PackageReader_(self, request: FixtureRequest):
-        return class_mock(request, "docx.opc.package.PackageReader")
+        return class_mock(request, "skelmis.docx.opc.package.PackageReader")
 
     @pytest.fixture
     def PackURI_(self, request: FixtureRequest):
-        return class_mock(request, "docx.opc.package.PackURI")
+        return class_mock(request, "skelmis.docx.opc.package.PackURI")
 
     @pytest.fixture
     def packuri_(self, request: FixtureRequest):
@@ -223,11 +223,11 @@ class DescribeOpcPackage:
 
     @pytest.fixture
     def PackageWriter_(self, request: FixtureRequest):
-        return class_mock(request, "docx.opc.package.PackageWriter")
+        return class_mock(request, "skelmis.docx.opc.package.PackageWriter")
 
     @pytest.fixture
     def PartFactory_(self, request: FixtureRequest):
-        return class_mock(request, "docx.opc.package.PartFactory")
+        return class_mock(request, "skelmis.docx.opc.package.PartFactory")
 
     @pytest.fixture
     def part_(self, request: FixtureRequest):
@@ -253,7 +253,7 @@ class DescribeOpcPackage:
 
     @pytest.fixture
     def Relationships_(self, request: FixtureRequest):
-        return class_mock(request, "docx.opc.package.Relationships")
+        return class_mock(request, "skelmis.docx.opc.package.Relationships")
 
     @pytest.fixture
     def rel_(self, request: FixtureRequest):
@@ -273,7 +273,7 @@ class DescribeOpcPackage:
 
     @pytest.fixture
     def Unmarshaller_(self, request: FixtureRequest):
-        return class_mock(request, "docx.opc.package.Unmarshaller")
+        return class_mock(request, "skelmis.docx.opc.package.Unmarshaller")
 
 
 class DescribeUnmarshaller:

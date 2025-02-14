@@ -2,7 +2,7 @@
 
 import pytest
 
-from docx.enum.style import WD_STYLE_TYPE
+from skelmis.docx.enum.style import WD_STYLE_TYPE
 
 from ..unitutil.cxml import element, xml
 
