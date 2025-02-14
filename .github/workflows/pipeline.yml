@@ -8,12 +8,12 @@ on:
     branches:
 
 jobs:
-  tox:
+  behave:
     runs-on: ubuntu-latest
     environment: test
     strategy:
       matrix:
-        python-version: [ "py310", "py311", "py312", "py313" ]
+        python-version: [ "3.10", "3.11", "3.12", "3.13" ]
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -21,17 +21,15 @@ jobs:
         id: setup-python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
       - name: Setup Poetry
         uses: ./.github/actions/setup-poetry
-      - name: Tox
-        id: tox
-        env:
-          PYTHON_VERSION: ${{ matrix.python-version }}
+      - name: Behave
+        id: behave
         run: |
           source .venv/bin/activate
           echo "Running tox with python version $PYTHON_VERSION"
-          tox -e "$PYTHON_VERSION"
+          behave
 
   pytest:
     runs-on: ubuntu-latest
