@@ -12,7 +12,7 @@ Candidate protocol
 
 Cell.vertical_alignment::
 
-    >>> from docx.enum.table import WD_CELL_ALIGN_VERTICAL
+    >>> from skelmis.docx.enum.table import WD_CELL_ALIGN_VERTICAL
     >>> cell = table.add_row().cells[0]
     >>> cell
     <docx.table._Cell object at 0x...>

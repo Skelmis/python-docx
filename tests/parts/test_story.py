@@ -2,14 +2,14 @@
 
 import pytest
 
-from docx.enum.style import WD_STYLE_TYPE
-from docx.image.image import Image
-from docx.opc.constants import RELATIONSHIP_TYPE as RT
-from docx.package import Package
-from docx.parts.document import DocumentPart
-from docx.parts.image import ImagePart
-from docx.parts.story import StoryPart
-from docx.styles.style import BaseStyle
+from skelmis.docx.enum.style import WD_STYLE_TYPE
+from skelmis.docx.image.image import Image
+from skelmis.docx.opc.constants import RELATIONSHIP_TYPE as RT
+from skelmis.docx.package import Package
+from skelmis.docx.parts.document import DocumentPart
+from skelmis.docx.parts.image import ImagePart
+from skelmis.docx.parts.story import StoryPart
+from skelmis.docx.styles.style import BaseStyle
 
 from ..unitutil.cxml import element
 from ..unitutil.file import snippet_text

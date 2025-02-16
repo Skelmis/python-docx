@@ -39,7 +39,7 @@ The |Styles| object is also iterable. By using the identification properties
 on |BaseStyle|, various subsets of the defined styles can be generated. For
 example, this code will produce a list of the defined paragraph styles::
 
-   >>> from docx.enum.style import WD_STYLE_TYPE
+   >>> from skelmis.docx.enum.style import WD_STYLE_TYPE
    >>> styles = document.styles
    >>> paragraph_styles = [
    ...     s for s in styles if s.type == WD_STYLE_TYPE.PARAGRAPH
@@ -95,7 +95,7 @@ Add or delete a style
 A new style can be added to the document by specifying a unique name and
 a style type::
 
-    >>> from docx.enum.style import WD_STYLE_TYPE
+    >>> from skelmis.docx.enum.style import WD_STYLE_TYPE
     >>> styles = document.styles
     >>> style = styles.add_style('Citation', WD_STYLE_TYPE.PARAGRAPH)
     >>> style.name
@@ -149,14 +149,14 @@ properties, see the |Font| API documentation.
 
 The font for a style can be accessed like this::
 
-    >>> from docx import Document
+    >>> from skelmis.docx import Document
     >>> document = Document()
     >>> style = document.styles['Normal']
     >>> font = style.font
 
 Typeface and size are set like this::
 
-    >>> from docx.shared import Pt
+    >>> from skelmis.docx.shared import Pt
     >>> font.name = 'Calibri'
     >>> font.size = Pt(12)
 
@@ -214,8 +214,8 @@ documentation page for the |ParagraphFormat| object.
 Here's an example of how you would create a paragraph style having hanging
 indentation of 1/4 inch, 12 points spacing above, and widow/orphan control::
 
-    >>> from docx.enum.style import WD_STYLE_TYPE
-    >>> from docx.shared import Inches, Pt
+    >>> from skelmis.docx.enum.style import WD_STYLE_TYPE
+    >>> from skelmis.docx.shared import Inches, Pt
     >>> document = Document()
     >>> style = document.styles.add_style('Indent', WD_STYLE_TYPE.PARAGRAPH)
     >>> paragraph_format = style.paragraph_format
@@ -243,7 +243,7 @@ specified.
 Here's an example of how you would change the next paragraph style of the
 *Heading 1* style to *Body Text*::
 
-    >>> from docx import Document
+    >>> from skelmis.docx import Document
     >>> document = Document()
     >>> styles = document.styles
 
@@ -295,7 +295,7 @@ Display a style in the style gallery
 The following code will cause the 'Body Text' paragraph style to appear first
 in the style gallery::
 
-    >>> from docx import Document
+    >>> from skelmis.docx import Document
     >>> document = Document()
     >>> style = document.styles['Body Text']
 

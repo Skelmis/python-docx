@@ -2,7 +2,7 @@
 
 from behave import given, then, when
 
-from docx import Document
+from skelmis.docx import Document
 
 from helpers import test_docx
 

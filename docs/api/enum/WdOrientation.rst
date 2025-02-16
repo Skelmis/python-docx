@@ -9,7 +9,7 @@ Specifies the page layout orientation.
 
 Example::
 
-    from docx.enum.section import WD_ORIENT
+    from skelmis.docx.enum.section import WD_ORIENT
 
     section = document.sections[-1]
     section.orientation = WD_ORIENT.LANDSCAPE

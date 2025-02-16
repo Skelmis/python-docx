@@ -10,7 +10,7 @@ Alias: ``MSO_THEME_COLOR``
 
 Example::
 
-    from docx.enum.dml import MSO_THEME_COLOR
+    from skelmis.docx.enum.dml import MSO_THEME_COLOR
 
     font.color.theme_color = MSO_THEME_COLOR.ACCENT_1
 

@@ -1,12 +1,11 @@
 [tool.poetry]
 name = "skelmis-docx"
-version = "1.6.2"
+version = "2.0.0"
 description = "Create, read, and update Microsoft Word .docx files."
 authors = ["Skelmis <skelmis.craft@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "docx", from="src"}]
-
+packages = [{include = "skelmis/docx", from="src"}]
 
 [project.urls]
 Homepage = "https://github.com/skelmis/python-docx"

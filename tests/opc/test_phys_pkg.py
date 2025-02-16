@@ -6,9 +6,9 @@ from zipfile import ZIP_DEFLATED, ZipFile
 
 import pytest
 
-from docx.opc.exceptions import PackageNotFoundError
-from docx.opc.packuri import PACKAGE_URI, PackURI
-from docx.opc.phys_pkg import (
+from skelmis.docx.opc.exceptions import PackageNotFoundError
+from skelmis.docx.opc.packuri import PACKAGE_URI, PackURI
+from skelmis.docx.opc.phys_pkg import (
     PhysPkgReader,
     PhysPkgWriter,
     _DirPkgReader,
@@ -179,4 +179,4 @@ def tmp_docx_path(tmpdir):
 
 @pytest.fixture
 def ZipFile_(request):
-    return class_mock(request, "docx.opc.phys_pkg.ZipFile")
+    return class_mock(request, "skelmis.docx.opc.phys_pkg.ZipFile")

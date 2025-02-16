@@ -8,8 +8,8 @@ table.
 
 Example::
 
-    from docx import Document
-    from docx.enum.style import WD_STYLE_TYPE
+    from skelmis.docx import Document
+    from skelmis.docx.enum.style import WD_STYLE_TYPE
 
     styles = Document().styles
     assert styles[0].type == WD_STYLE_TYPE.PARAGRAPH

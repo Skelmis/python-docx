@@ -1,14 +1,14 @@
 """Test suite for opc.oxml module."""
 
-from docx.opc.constants import RELATIONSHIP_TARGET_MODE as RTM
-from docx.opc.oxml import (
+from skelmis.docx.opc.constants import RELATIONSHIP_TARGET_MODE as RTM
+from skelmis.docx.opc.oxml import (
     CT_Default,
     CT_Override,
     CT_Relationship,
     CT_Relationships,
     CT_Types,
 )
-from docx.oxml.xmlchemy import serialize_for_reading
+from skelmis.docx.oxml.xmlchemy import serialize_for_reading
 
 from .unitdata.rels import (
     a_Default,

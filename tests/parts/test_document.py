@@ -2,18 +2,18 @@
 
 import pytest
 
-from docx.enum.style import WD_STYLE_TYPE
-from docx.opc.constants import RELATIONSHIP_TYPE as RT
-from docx.opc.coreprops import CoreProperties
-from docx.package import Package
-from docx.parts.document import DocumentPart
-from docx.parts.hdrftr import FooterPart, HeaderPart
-from docx.parts.numbering import NumberingPart
-from docx.parts.settings import SettingsPart
-from docx.parts.styles import StylesPart
-from docx.settings import Settings
-from docx.styles.style import BaseStyle
-from docx.styles.styles import Styles
+from skelmis.docx.enum.style import WD_STYLE_TYPE
+from skelmis.docx.opc.constants import RELATIONSHIP_TYPE as RT
+from skelmis.docx.opc.coreprops import CoreProperties
+from skelmis.docx.package import Package
+from skelmis.docx.parts.document import DocumentPart
+from skelmis.docx.parts.hdrftr import FooterPart, HeaderPart
+from skelmis.docx.parts.numbering import NumberingPart
+from skelmis.docx.parts.settings import SettingsPart
+from skelmis.docx.parts.styles import StylesPart
+from skelmis.docx.settings import Settings
+from skelmis.docx.styles.style import BaseStyle
+from skelmis.docx.styles.styles import Styles
 
 from ..oxml.parts.unitdata.document import a_body, a_document
 from ..unitutil.mock import class_mock, instance_mock, method_mock, property_mock
@@ -234,7 +234,7 @@ class DescribeDocumentPart:
 
     @pytest.fixture
     def FooterPart_(self, request):
-        return class_mock(request, "docx.parts.document.FooterPart")
+        return class_mock(request, "skelmis.docx.parts.document.FooterPart")
 
     @pytest.fixture
     def footer_part_(self, request):
@@ -242,7 +242,7 @@ class DescribeDocumentPart:
 
     @pytest.fixture
     def HeaderPart_(self, request):
-        return class_mock(request, "docx.parts.document.HeaderPart")
+        return class_mock(request, "skelmis.docx.parts.document.HeaderPart")
 
     @pytest.fixture
     def header_part_(self, request):
@@ -250,11 +250,11 @@ class DescribeDocumentPart:
 
     @pytest.fixture
     def InlineShapes_(self, request):
-        return class_mock(request, "docx.parts.document.InlineShapes")
+        return class_mock(request, "skelmis.docx.parts.document.InlineShapes")
 
     @pytest.fixture
     def NumberingPart_(self, request):
-        return class_mock(request, "docx.parts.document.NumberingPart")
+        return class_mock(request, "skelmis.docx.parts.document.NumberingPart")
 
     @pytest.fixture
     def numbering_part_(self, request):
@@ -282,7 +282,7 @@ class DescribeDocumentPart:
 
     @pytest.fixture
     def SettingsPart_(self, request):
-        return class_mock(request, "docx.parts.document.SettingsPart")
+        return class_mock(request, "skelmis.docx.parts.document.SettingsPart")
 
     @pytest.fixture
     def settings_(self, request):
@@ -306,7 +306,7 @@ class DescribeDocumentPart:
 
     @pytest.fixture
     def StylesPart_(self, request):
-        return class_mock(request, "docx.parts.document.StylesPart")
+        return class_mock(request, "skelmis.docx.parts.document.StylesPart")
 
     @pytest.fixture
     def styles_part_(self, request):

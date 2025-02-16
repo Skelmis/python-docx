@@ -2,12 +2,12 @@
 
 import pytest
 
-from docx.opc.constants import CONTENT_TYPE as CT
-from docx.opc.package import OpcPackage
-from docx.opc.part import PartFactory
-from docx.package import Package
-from docx.parts.settings import SettingsPart
-from docx.settings import Settings
+from skelmis.docx.opc.constants import CONTENT_TYPE as CT
+from skelmis.docx.opc.package import OpcPackage
+from skelmis.docx.opc.part import PartFactory
+from skelmis.docx.package import Package
+from skelmis.docx.parts.settings import SettingsPart
+from skelmis.docx.settings import Settings
 
 from ..unitutil.cxml import element
 from ..unitutil.mock import class_mock, instance_mock, method_mock
@@ -59,7 +59,7 @@ class DescribeSettingsPart:
 
     @pytest.fixture
     def Settings_(self, request, settings_):
-        return class_mock(request, "docx.parts.settings.Settings", return_value=settings_)
+        return class_mock(request, "skelmis.docx.parts.settings.Settings", return_value=settings_)
 
     @pytest.fixture
     def settings_(self, request):

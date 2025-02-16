@@ -9,7 +9,7 @@ Specifies the rule for determining the height of a table row
 
 Example::
 
-    from docx.enum.table import WD_ROW_HEIGHT_RULE
+    from skelmis.docx.enum.table import WD_ROW_HEIGHT_RULE
 
     table = document.add_table(3, 3)
     table.rows[0].height_rule = WD_ROW_HEIGHT_RULE.EXACTLY

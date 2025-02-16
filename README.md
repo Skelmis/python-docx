@@ -21,7 +21,7 @@ pip install skelmis-docx
 ## Example
 
 ```python
->>> from docx import Document
+>>> from skelmis.docx import Document
 
 >>> document = Document()
 >>> document.add_paragraph("It was a dark and stormy night.")

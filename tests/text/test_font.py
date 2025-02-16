@@ -9,11 +9,11 @@ from typing import cast
 import pytest
 from _pytest.fixtures import FixtureRequest
 
-from docx.dml.color import ColorFormat
-from docx.enum.text import WD_COLOR, WD_UNDERLINE
-from docx.oxml.text.run import CT_R
-from docx.shared import Length, Pt
-from docx.text.font import Font
+from skelmis.docx.dml.color import ColorFormat
+from skelmis.docx.enum.text import WD_COLOR, WD_UNDERLINE
+from skelmis.docx.oxml.text.run import CT_R
+from skelmis.docx.shared import Length, Pt
+from skelmis.docx.text.font import Font
 
 from ..unitutil.cxml import element, xml
 from ..unitutil.mock import Mock, class_mock, instance_mock
@@ -422,4 +422,4 @@ class DescribeFont:
 
     @pytest.fixture
     def ColorFormat_(self, request: FixtureRequest, color_: Mock):
-        return class_mock(request, "docx.text.font.ColorFormat", return_value=color_)
+        return class_mock(request, "skelmis.docx.text.font.ColorFormat", return_value=color_)

@@ -4,15 +4,15 @@ from typing import List, cast
 
 import pytest
 
-from docx import types as t
-from docx.enum.style import WD_STYLE_TYPE
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.oxml.text.paragraph import CT_P
-from docx.oxml.text.run import CT_R
-from docx.parts.document import DocumentPart
-from docx.text.paragraph import Paragraph
-from docx.text.parfmt import ParagraphFormat
-from docx.text.run import Run
+from skelmis.docx import types as t
+from skelmis.docx.enum.style import WD_STYLE_TYPE
+from skelmis.docx.enum.text import WD_ALIGN_PARAGRAPH
+from skelmis.docx.oxml.text.paragraph import CT_P
+from skelmis.docx.oxml.text.run import CT_R
+from skelmis.docx.parts.document import DocumentPart
+from skelmis.docx.text.paragraph import Paragraph
+from skelmis.docx.text.parfmt import ParagraphFormat
+from skelmis.docx.text.run import Run
 
 from ..unitutil.cxml import element, xml
 from ..unitutil.mock import call, class_mock, instance_mock, method_mock, property_mock
@@ -364,7 +364,7 @@ class DescribeParagraph:
     def ParagraphFormat_(self, request, paragraph_format_):
         return class_mock(
             request,
-            "docx.text.paragraph.ParagraphFormat",
+            "skelmis.docx.text.paragraph.ParagraphFormat",
             return_value=paragraph_format_,
         )
 
@@ -379,7 +379,7 @@ class DescribeParagraph:
     @pytest.fixture
     def Run_(self, request, runs_):
         run_, run_2_ = runs_
-        return class_mock(request, "docx.text.paragraph.Run", side_effect=[run_, run_2_])
+        return class_mock(request, "skelmis.docx.text.paragraph.Run", side_effect=[run_, run_2_])
 
     @pytest.fixture
     def r_(self, request):

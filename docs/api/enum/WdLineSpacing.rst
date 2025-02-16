@@ -7,7 +7,7 @@ Specifies a line spacing format to be applied to a paragraph.
 
 Example::
 
-    from docx.enum.text import WD_LINE_SPACING
+    from skelmis.docx.enum.text import WD_LINE_SPACING
 
     paragraph = document.add_paragraph()
     paragraph.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY

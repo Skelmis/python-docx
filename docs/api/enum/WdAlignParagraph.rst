@@ -9,7 +9,7 @@ Specifies paragraph justification type.
 
 Example::
 
-    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    from skelmis.docx.enum.text import WD_ALIGN_PARAGRAPH
 
     paragraph = document.add_paragraph()
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER

@@ -2,8 +2,8 @@
 
 from behave import given, then, when
 
-from docx import Document
-from docx.settings import Settings
+from skelmis.docx import Document
+from skelmis.docx.settings import Settings
 
 from helpers import test_docx
 

@@ -2,11 +2,11 @@
 
 import pytest
 
-from docx.oxml.exceptions import InvalidXmlError
-from docx.oxml.ns import qn
-from docx.oxml.parser import parse_xml, register_element_cls
-from docx.oxml.simpletypes import BaseIntType
-from docx.oxml.xmlchemy import (
+from skelmis.docx.oxml.exceptions import InvalidXmlError
+from skelmis.docx.oxml.ns import qn
+from skelmis.docx.oxml.parser import parse_xml, register_element_cls
+from skelmis.docx.oxml.simpletypes import BaseIntType
+from skelmis.docx.oxml.xmlchemy import (
     BaseOxmlElement,
     Choice,
     OneAndOnlyOne,

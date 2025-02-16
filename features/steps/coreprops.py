@@ -5,8 +5,8 @@ import datetime as dt
 from behave import given, then, when
 from behave.runner import Context
 
-from docx import Document
-from docx.opc.coreprops import CoreProperties
+from skelmis.docx import Document
+from skelmis.docx.opc.coreprops import CoreProperties
 
 from helpers import test_docx
 

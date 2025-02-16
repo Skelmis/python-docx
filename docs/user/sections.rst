@@ -106,7 +106,7 @@ Page margins
 Seven properties on |Section| together specify the various edge spacings that
 determine where text appears on the page::
 
-    >>> from docx.shared import Inches
+    >>> from skelmis.docx.shared import Inches
     >>> section.left_margin, section.right_margin
     (1143000, 1143000)  # (Inches(1.25), Inches(1.25))
     >>> section.top_margin, section.bottom_margin

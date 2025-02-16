@@ -1,9 +1,9 @@
 """Test data for relationship-related unit tests."""
 
-from docx.opc.constants import NAMESPACE as NS
-from docx.opc.constants import RELATIONSHIP_TYPE as RT
-from docx.opc.oxml import parse_xml
-from docx.opc.rel import Relationships
+from skelmis.docx.opc.constants import NAMESPACE as NS
+from skelmis.docx.opc.constants import RELATIONSHIP_TYPE as RT
+from skelmis.docx.opc.oxml import parse_xml
+from skelmis.docx.opc.rel import Relationships
 
 
 class BaseBuilder:

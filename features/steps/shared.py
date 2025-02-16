@@ -4,7 +4,7 @@ import os
 
 from behave import given, when
 
-from docx import Document
+from skelmis.docx import Document
 
 from helpers import saved_docx_path
 

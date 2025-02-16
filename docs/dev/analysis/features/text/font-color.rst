@@ -29,8 +29,8 @@ Candidate Protocol
 
 :class:`docx.text.run.Run` has a font property::
 
-    >>> from docx import Document
-    >>> from docx.text.run import Font, Run
+    >>> from skelmis.docx import Document
+    >>> from skelmis.docx.text.run import Font, Run
     >>> run = Document().add_paragraph().add_run()
     >>> isinstance(run, Run)
     True
@@ -41,7 +41,7 @@ Candidate Protocol
 :class:`docx.text.run.Font` has a read-only color property, returning
 a :class:`docx.dml.color.ColorFormat` object::
 
-    >>> from docx.dml.color import ColorFormat
+    >>> from skelmis.docx.dml.color import ColorFormat
     >>> color = font.color
     >>> isinstance(font.color, ColorFormat)
     True

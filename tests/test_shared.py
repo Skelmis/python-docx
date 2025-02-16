@@ -2,8 +2,8 @@
 
 import pytest
 
-from docx.opc.part import XmlPart
-from docx.shared import Cm, ElementProxy, Emu, Inches, Length, Mm, Pt, RGBColor, Twips
+from skelmis.docx.opc.part import XmlPart
+from skelmis.docx.shared import Cm, ElementProxy, Emu, Inches, Length, Mm, Pt, RGBColor, Twips
 
 from .unitutil.cxml import element
 from .unitutil.mock import instance_mock
