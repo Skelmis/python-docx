@@ -50,7 +50,7 @@ reportImportCycles = true
 reportUnnecessaryCast = true
 reportUnnecessaryTypeIgnoreComment = true
 stubPath = "./typings"
-typeCheckingMode = "stri ct"
+typeCheckingMode = "strict"
 verboseOutput = true
 
 [tool.pytest.ini_options]
