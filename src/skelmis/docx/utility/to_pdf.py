@@ -1,4 +1,3 @@
-import hashlib
 import json
 import logging
 import os
@@ -6,27 +5,10 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import warnings
 from collections.abc import Callable
 from pathlib import Path
 
 log = logging.getLogger(__name__)
-
-
-def get_sha1(path: Path) -> str | None:
-    """
-    Get the SHA1 checksum of the file at `path`.
-    """
-    if not path.exists():
-        return None
-
-    sha1sum = hashlib.sha1()
-    with open(path, "rb") as src:
-        block = src.read(2 ** 16)
-        while len(block) != 0:
-            sha1sum.update(block)
-            block = src.read(2 ** 16)
-    return sha1sum.hexdigest().lower()
 
 
 def _create_pdf_windows(docx_file: Path) -> None:
@@ -128,25 +110,17 @@ def export_libre_macro(macro_folder: Path | None = None) -> None:
         except KeyError as e:
             raise ValueError(f"Unsupported platform: {sys.platform}") from e
 
-    expect_macro_sha1 = "539afdb97c8fb21a0cd08143d6a531d7d683df21"
-
+    source_macro_path = Path(__file__).parent / "macros/Module1.xba"
     target_macro_path = macro_folder / "Module1.xba"
-    target_macro_sha1 = get_sha1(target_macro_path)
 
-    if expect_macro_sha1 == target_macro_sha1:
-        return  # No changes required
+    source_macro_contents = os.linesep.join(source_macro_path.read_text().splitlines())  # ensure correct line endings
+    target_macro_contents = target_macro_path.read_text()
 
-    stored_macro_path = Path(__file__).parent / "macros/Module1.xba"
-    stored_macro_sha1 = get_sha1(stored_macro_path)
-
-    if expect_macro_sha1 != stored_macro_sha1:
-        raise ValueError(
-            f"Unexpected SHA1 checksum for stored macro: {stored_macro_path.name}"
-            f" (expected={expect_macro_sha1}, actual={stored_macro_sha1}"
-        )
-
-    log.info(f"Overwriting macro at location {target_macro_path}")
-    shutil.copy(stored_macro_path, target_macro_path)
+    if source_macro_contents != target_macro_contents:
+        log.info(f"Overwriting LibreOffice macro at location {target_macro_path}")
+        target_macro_path.write_text(source_macro_contents)
+    else:
+        log.info("LibreOffice macro up to date")
 
 
 def update_toc(docx_file: Path | str) -> None:
