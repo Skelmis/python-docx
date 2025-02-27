@@ -22,8 +22,6 @@ def _create_pdf_windows(docx_file: Path) -> None:
     doc = word.Documents.Open(str(docx_filepath))
     try:
         doc.SaveAs(str(pdf_filepath), FileFormat=wdFormatPDF)
-    except:
-        raise
     finally:
         doc.Close(0)
 
