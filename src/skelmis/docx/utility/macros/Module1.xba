@@ -22,6 +22,6 @@ Sub UpdateTOC(path As String)
 
      doc.store()
      doc.close(True)
-end sub
+End Sub
 
 </script:module>
