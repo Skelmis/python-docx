@@ -1,7 +1,7 @@
 # pyright: reportPrivateUsage=false
 # pyright: reportUnknownMemberType=false
 
-"""Unit test suite for the docx.document module."""
+"""Unit test suite for the skelmis.docx.document module."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""Unit test suite for the docx.text.paragraph module."""
+"""Unit test suite for the skelmis.docx.text.paragraph module."""
 
 from typing import List, cast
 

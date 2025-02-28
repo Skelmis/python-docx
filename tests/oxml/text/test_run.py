@@ -1,4 +1,4 @@
-"""Test suite for the docx.oxml.text.run module."""
+"""Test suite for the skelmis.docx.oxml.text.run module."""
 
 from typing import cast
 

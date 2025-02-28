@@ -1,4 +1,4 @@
-"""Test suite for the docx.text.tabstops module."""
+"""Test suite for the skelmis.docx.text.tabstops module."""
 
 import pytest
 

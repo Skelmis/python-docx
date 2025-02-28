@@ -4,7 +4,7 @@
 Document |Settings| objects
 ---------------------------
 
-.. currentmodule:: docx.settings
+.. currentmodule:: skelmis.docx.settings
 
 .. autoclass:: Settings()
    :members:

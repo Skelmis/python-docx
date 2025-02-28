@@ -4,7 +4,7 @@
 Shape-related objects
 =====================
 
-.. currentmodule:: docx.shape
+.. currentmodule:: skelmis.docx.shape
 
 
 |InlineShapes| objects

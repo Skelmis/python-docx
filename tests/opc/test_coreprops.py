@@ -1,6 +1,6 @@
 # pyright: reportPrivateUsage=false
 
-"""Unit test suite for the docx.opc.coreprops module."""
+"""Unit test suite for the skelmis.docx.opc.coreprops module."""
 
 from __future__ import annotations
 

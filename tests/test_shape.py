@@ -1,4 +1,4 @@
-"""Test suite for the docx.shape module."""
+"""Test suite for the skelmis.docx.shape module."""
 
 import pytest
 

@@ -1,6 +1,6 @@
 # pyright: reportPrivateUsage=false
 
-"""Unit test suite for docx.opc.package module"""
+"""Unit test suite for skelmis.docx.opc.package module"""
 
 from __future__ import annotations
 

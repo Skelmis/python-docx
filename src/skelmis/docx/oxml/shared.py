@@ -1,4 +1,4 @@
-"""Objects shared by modules in the docx.oxml subpackage."""
+"""Objects shared by modules in the skelmis.docx.oxml subpackage."""
 
 from __future__ import annotations
 

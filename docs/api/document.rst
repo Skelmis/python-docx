@@ -10,13 +10,13 @@ The main Document and related objects.
 |Document| constructor
 ----------------------
 
-.. autofunction:: docx.Document
+.. autofunction:: skelmis.docx.Document
 
 
 |Document| objects
 ------------------
 
-.. autoclass:: docx.document.Document()
+.. autoclass:: skelmis.docx.document.Document()
    :members:
    :exclude-members: styles_part
 
@@ -44,7 +44,7 @@ values for the title, last_modified_by, revision, and modified properties.
 Client code should update properties like revision and last_modified_by
 if that behavior is desired.
 
-.. currentmodule:: docx.opc.coreprops
+.. currentmodule:: skelmis.docx.opc.coreprops
 
 .. class:: CoreProperties
 

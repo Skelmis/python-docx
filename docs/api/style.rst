@@ -14,7 +14,7 @@ in the appropriate style.
 |Styles| objects
 ----------------
 
-.. currentmodule:: docx.styles.styles
+.. currentmodule:: skelmis.docx.styles.styles
 
 .. autoclass:: Styles()
    :members:
@@ -26,7 +26,7 @@ in the appropriate style.
 |BaseStyle| objects
 -------------------
 
-.. currentmodule:: docx.styles.style
+.. currentmodule:: skelmis.docx.styles.style
 
 .. autoclass:: BaseStyle()
    :members:
@@ -78,7 +78,7 @@ in the appropriate style.
 |LatentStyles| objects
 ----------------------
 
-.. currentmodule:: docx.styles.latent
+.. currentmodule:: skelmis.docx.styles.latent
 
 .. autoclass:: LatentStyles()
    :members:

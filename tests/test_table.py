@@ -1,6 +1,6 @@
 # pyright: reportPrivateUsage=false
 
-"""Test suite for the docx.table module."""
+"""Test suite for the skelmis.docx.table module."""
 
 from __future__ import annotations
 

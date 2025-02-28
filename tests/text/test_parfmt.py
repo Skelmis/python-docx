@@ -1,4 +1,4 @@
-"""Test suite for docx.text.parfmt module, containing the ParagraphFormat object."""
+"""Test suite for skelmis.docx.text.parfmt module, containing the ParagraphFormat object."""
 
 import pytest
 

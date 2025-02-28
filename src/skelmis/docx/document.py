@@ -48,7 +48,7 @@ class Document(ElementProxy):
         then you should override this method with your own styling choices
         as these are shipped 'as is' and are generally good enough.
         """
-        STYP = docx.enum.style.WD_STYLE_TYPE
+        STYP = skelmis.docx.enum.style.WD_STYLE_TYPE
         num_xml = self.part.numbering_part.element
         next_abstract_id = max([J.abstractNumId for J in num_xml.abstractNum_lst]) + 1
         l = num_xml._new_abstractNum()

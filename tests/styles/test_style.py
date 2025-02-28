@@ -1,4 +1,4 @@
-"""Test suite for the docx.styles.style module."""
+"""Test suite for the skelmis.docx.styles.style module."""
 
 import pytest
 
@@ -75,7 +75,9 @@ class DescribeStyleFactory:
 
     @pytest.fixture
     def _TableStyle_(self, request, table_style_):
-        return class_mock(request, "skelmis.docx.styles.style._TableStyle", return_value=table_style_)
+        return class_mock(
+            request, "skelmis.docx.styles.style._TableStyle", return_value=table_style_
+        )
 
     @pytest.fixture
     def table_style_(self, request):

@@ -1,4 +1,4 @@
-"""Test suite for the docx.text.hyperlink module."""
+"""Test suite for the skelmis.docx.text.hyperlink module."""
 
 from typing import cast
 
@@ -15,7 +15,7 @@ from ..unitutil.mock import FixtureRequest, Mock, instance_mock
 
 
 class DescribeHyperlink:
-    """Unit-test suite for the docx.text.hyperlink.Hyperlink object."""
+    """Unit-test suite for the skelmis.docx.text.hyperlink.Hyperlink object."""
 
     @pytest.mark.parametrize(
         ("hlink_cxml", "expected_value"),

@@ -45,7 +45,7 @@ possibility using a ``len()`` check or ``try`` block to avoid an uncaught
 Adding a new section
 --------------------
 
-.. currentmodule:: docx.api
+.. currentmodule:: skelmis.docx.api
 
 The :meth:`Document.add_section` method allows a new section to be started at
 the end of the document. Paragraphs and tables added after calling this method
@@ -62,7 +62,7 @@ will appear in the new section::
 Section properties
 ------------------
 
-.. currentmodule:: docx.section
+.. currentmodule:: skelmis.docx.section
 
 The |Section| object has eleven properties that allow page layout settings to
 be discovered and specified.

@@ -1,6 +1,6 @@
 # pyright: reportPrivateUsage=false
 
-"""Unit test suite for docx.opc.part module"""
+"""Unit test suite for skelmis.docx.opc.part module"""
 
 from __future__ import annotations
 
@@ -239,7 +239,9 @@ class DescribePartFactory:
 
     @pytest.fixture
     def cls_method_fn_(self, request, cls_selector_fn_):
-        return function_mock(request, "skelmis.docx.opc.part.cls_method_fn", return_value=cls_selector_fn_)
+        return function_mock(
+            request, "skelmis.docx.opc.part.cls_method_fn", return_value=cls_selector_fn_
+        )
 
     @pytest.fixture
     def cls_selector_fixture(

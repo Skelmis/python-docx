@@ -1,4 +1,4 @@
-"""Unit test suite for docx.image.jpeg module"""
+"""Unit test suite for skelmis.docx.image.jpeg module"""
 
 import io
 
@@ -346,7 +346,9 @@ class Describe_App1Marker:
     def get_tiff_fixture(self, request, substream_, Tiff_, tiff_):
         bytes_ = b"xfillerxMM\x00*\x00\x00\x00\x42"
         stream_reader = StreamReader(io.BytesIO(bytes_), BIG_ENDIAN)
-        BytesIO_ = class_mock(request, "skelmis.docx.image.jpeg.io.BytesIO", return_value=substream_)
+        BytesIO_ = class_mock(
+            request, "skelmis.docx.image.jpeg.io.BytesIO", return_value=substream_
+        )
         offset, segment_length, segment_bytes = 0, 16, bytes_[8:]
         return (
             stream_reader,
@@ -622,7 +624,9 @@ class Describe_MarkerParser:
 
     @pytest.fixture
     def StreamReader_(self, request, stream_reader_):
-        return class_mock(request, "skelmis.docx.image.jpeg.StreamReader", return_value=stream_reader_)
+        return class_mock(
+            request, "skelmis.docx.image.jpeg.StreamReader", return_value=stream_reader_
+        )
 
     @pytest.fixture
     def stream_reader_(self, request):

@@ -1,4 +1,4 @@
-"""Unit test suite for the docx.opc.parts.coreprops module."""
+"""Unit test suite for the skelmis.docx.opc.parts.coreprops module."""
 
 from __future__ import annotations
 
