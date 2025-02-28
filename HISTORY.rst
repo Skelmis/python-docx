@@ -3,6 +3,11 @@
 Release History
 ---------------
 
+2.1.0 (2025-03-01)
+++++++++++++++++++
+
+- Fix items not being fully moved to new namespace
+
 2.0.0 (2025-02-16)
 ++++++++++++++++++
 
