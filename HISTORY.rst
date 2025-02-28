@@ -3,6 +3,26 @@
 Release History
 ---------------
 
+2.1.0 (2025-03-01)
+++++++++++++++++++
+
+- Fix items not being fully moved to new namespace
+
+2.0.0 (2025-02-16)
+++++++++++++++++++
+
+- Move to private `skelmis` namespace to reduce collision issues. `PR here <https://github.com/Skelmis/python-docx/pull/15>`
+
+1.2.X -> 1.6.X
+++++++++++++++
+
+- Supporting multiple numbered lists within a document (`1 <https://skelmis-docx.readthedocs.io/en/latest/api/text.html#docx.text.paragraph.Paragraph.restart_numbering>`, `2 <https://skelmis-docx.readthedocs.io/en/latest/api/document.html#docx.document.Document.configure_styles_for_numbered_lists>`)
+- Supporting TOC updates within the package without the need to open the document manually (`1 <https://skelmis-docx.readthedocs.io/en/latest/api/utility.html#docx.utility.update_toc>`, `2 <https://skelmis-docx.readthedocs.io/en/latest/api/utility.html#docx.utility.export_libre_macro>`)
+- Supporting floating images within documents (`1 <https://skelmis-docx.readthedocs.io/en/latest/api/text.html#docx.text.run.Run.add_float_picture>`)
+- Supporting the ability to transform word documents into PDF's (`1 <https://skelmis-docx.readthedocs.io/en/latest/api/utility.html#docx.utility.document_to_pdf>`)
+- Horizontal rules + paragraph bounding boxes / borders (`1 <https://skelmis-docx.readthedocs.io/en/latest/api/text.html#docx.text.paragraph.Paragraph.insert_horizontal_rule>`, `2 <https://skelmis-docx.readthedocs.io/en/latest/api/text.html#docx.text.paragraph.Paragraph.draw_paragraph_border>`)
+- External hyperlinks (`1 <https://skelmis-docx.readthedocs.io/en/latest/api/text.html#docx.text.paragraph.Paragraph.add_external_hyperlink>`)
+
 1.1.2 (2024-05-01)
 ++++++++++++++++++
 

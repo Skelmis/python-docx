@@ -1,4 +1,4 @@
-"""Unit test suite for docx.parts.image module."""
+"""Unit test suite for skelmis.docx.parts.image module."""
 
 import pytest
 

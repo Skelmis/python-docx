@@ -1,4 +1,4 @@
-"""Unit test suite for the docx.styles.styles module."""
+"""Unit test suite for the skelmis.docx.styles.styles module."""
 
 import pytest
 
@@ -378,7 +378,9 @@ class DescribeStyles:
 
     @pytest.fixture
     def LatentStyles_(self, request, latent_styles_):
-        return class_mock(request, "skelmis.docx.styles.styles.LatentStyles", return_value=latent_styles_)
+        return class_mock(
+            request, "skelmis.docx.styles.styles.LatentStyles", return_value=latent_styles_
+        )
 
     @pytest.fixture
     def latent_styles_(self, request):

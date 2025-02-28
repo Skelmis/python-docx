@@ -1,6 +1,6 @@
 # pyright: reportPrivateUsage=false
 
-"""Unit test suite for the docx.opc.rel module."""
+"""Unit test suite for the skelmis.docx.opc.rel module."""
 
 import pytest
 

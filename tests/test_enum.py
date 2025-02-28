@@ -1,4 +1,4 @@
-"""Test suite for docx.enum module, focused on base classes.
+"""Test suite for skelmis.docx.enum module, focused on base classes.
 
 Configured a little differently because of the meta-programming, the two enumeration
 classes at the top constitute the entire fixture and the tests themselves just make

@@ -1,4 +1,4 @@
-"""Test suite for the docx.blkcntnr (block item container) module."""
+"""Test suite for the skelmis.docx.blkcntnr (block item container) module."""
 
 import pytest
 

@@ -1,4 +1,4 @@
-"""Unit test suite for docx.image.png module."""
+"""Unit test suite for skelmis.docx.image.png module."""
 
 import io
 
@@ -271,7 +271,9 @@ class Describe_ChunkParser:
 
     @pytest.fixture
     def _ChunkFactory_(self, request, chunk_lst_):
-        return function_mock(request, "skelmis.docx.image.png._ChunkFactory", side_effect=chunk_lst_)
+        return function_mock(
+            request, "skelmis.docx.image.png._ChunkFactory", side_effect=chunk_lst_
+        )
 
     @pytest.fixture
     def chunk_lst_(self, chunk_, chunk_2_):

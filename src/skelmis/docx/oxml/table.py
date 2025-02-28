@@ -4,7 +4,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Callable, cast
 
-from skelmis.docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT, WD_ROW_HEIGHT_RULE, WD_TABLE_DIRECTION
+from skelmis.docx.enum.table import (
+    WD_CELL_VERTICAL_ALIGNMENT,
+    WD_ROW_HEIGHT_RULE,
+    WD_TABLE_DIRECTION,
+)
 from skelmis.docx.exceptions import InvalidSpanError
 from skelmis.docx.oxml.ns import nsdecls, qn
 from skelmis.docx.oxml.parser import parse_xml

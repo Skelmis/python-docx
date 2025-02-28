@@ -11,6 +11,6 @@ contexts.
 |ColorFormat| objects
 ---------------------
 
-.. autoclass:: docx.dml.color.ColorFormat()
+.. autoclass:: skelmis.docx.dml.color.ColorFormat()
    :members:
    :undoc-members:

@@ -1,6 +1,6 @@
 # pyright: reportPrivateUsage=false
 
-"""Unit-test suite for the docx.text.pagebreak module."""
+"""Unit-test suite for the skelmis.docx.text.pagebreak module."""
 
 from typing import cast
 
@@ -14,7 +14,7 @@ from ..unitutil.cxml import element, xml
 
 
 class DescribeRenderedPageBreak:
-    """Unit-test suite for the docx.text.pagebreak.RenderedPageBreak object."""
+    """Unit-test suite for the skelmis.docx.text.pagebreak.RenderedPageBreak object."""
 
     def it_raises_on_preceding_fragment_when_page_break_is_not_first_in_paragrah(
         self, fake_parent: t.ProvidesStoryPart

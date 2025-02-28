@@ -1,15 +1,15 @@
 [tool.poetry]
 name = "skelmis-docx"
-version = "2.0.0"
+version = "2.1.0"
 description = "Create, read, and update Microsoft Word .docx files."
 authors = ["Skelmis <skelmis.craft@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "skelmis/docx", from="src"}]
 
-[project.urls]
-Homepage = "https://github.com/skelmis/python-docx"
-Documentation = "https://skelmis-docx.readthedocs.io/en/latest/"
+#[project.urls]
+#Homepage = "https://github.com/skelmis/python-docx"
+#Documentation = "https://skelmis-docx.readthedocs.io/en/latest/"
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -29,7 +29,7 @@ pyparsing = "^3.1.2"
 pytest = "^8.3.2"
 pytest-coverage = "^0.0"
 pytest-xdist = "^3.6.1"
-black = "^24.8.0"
+black = "^24.10.0"
 
 [tool.poetry.group.docs.dependencies]
 sphinx = "^8.0.2"

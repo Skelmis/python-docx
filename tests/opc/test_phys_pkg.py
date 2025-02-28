@@ -1,4 +1,4 @@
-"""Test suite for docx.opc.phys_pkg module."""
+"""Test suite for skelmis.docx.opc.phys_pkg module."""
 
 import hashlib
 import io

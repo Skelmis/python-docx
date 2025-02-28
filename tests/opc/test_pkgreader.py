@@ -1,4 +1,4 @@
-"""Unit test suite for docx.opc.pkgreader module."""
+"""Unit test suite for skelmis.docx.opc.pkgreader module."""
 
 import pytest
 

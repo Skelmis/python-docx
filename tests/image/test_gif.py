@@ -1,4 +1,4 @@
-"""Unit test suite for docx.image.gif module."""
+"""Unit test suite for skelmis.docx.image.gif module."""
 
 import io
 

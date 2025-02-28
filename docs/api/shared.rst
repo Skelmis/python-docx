@@ -4,7 +4,7 @@
 Shared classes
 ==============
 
-.. currentmodule:: docx.shared
+.. currentmodule:: skelmis.docx.shared
 
 
 Length objects

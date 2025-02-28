@@ -7,7 +7,7 @@ Table objects
 Table objects are constructed using the ``add_table()`` method on |Document|.
 
 
-.. currentmodule:: docx.table
+.. currentmodule:: skelmis.docx.table
 
 
 |Table| objects
