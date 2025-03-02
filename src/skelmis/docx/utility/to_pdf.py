@@ -1,34 +1,14 @@
 import json
 import logging
-import secrets
+import os
 import shutil
 import subprocess
 import sys
+import tempfile
+from collections.abc import Callable
 from pathlib import Path
 
 log = logging.getLogger(__name__)
-
-
-def _update_toc_linux(docx_file: Path) -> None:
-    """TOC bindings for linux"""
-    # This method hangs if item is already open, so we cheat a little here
-    tmp_file = str(docx_file) + f".{secrets.token_hex(4)}.docx"
-    tmp_file = Path(tmp_file)
-    shutil.copy(docx_file, tmp_file)
-
-    # Source: https://github.com/python-openxml/python-docx/issues/1207#issuecomment-1924053420
-    subprocess.call(
-        [
-            "libreoffice",
-            "--headless",
-            f"macro:///Standard.Module1.UpdateTOC({str(tmp_file)})",
-        ],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
-
-    shutil.copy(tmp_file, docx_file)
-    tmp_file.unlink()
 
 
 def _create_pdf_windows(docx_file: Path) -> None:
@@ -42,8 +22,6 @@ def _create_pdf_windows(docx_file: Path) -> None:
     doc = word.Documents.Open(str(docx_filepath))
     try:
         doc.SaveAs(str(pdf_filepath), FileFormat=wdFormatPDF)
-    except:
-        raise
     finally:
         doc.Close(0)
 
@@ -110,36 +88,107 @@ def _create_pdf_macos(docx_file: Path) -> None:
             sys.exit(1)
 
 
-def export_libre_macro(
-    macro_folder: Path = Path("~/.config/libreoffice/4/user/basic/Standard"),
-) -> None:
-    """Automatically moves the LibreOffice macro file to `macro_folder`.
+def export_libre_macro(macro_folder: Path | None = None) -> None:
+    """
+    Automatically moves the LibreOffice macro file to `macro_folder`.
 
     Warning, this overrides Module1.xba
 
-    :py:class:`Path` is where your macros live
+    :py:class:`Path` is where your macros live (leave None to let package choose location)
     """
-    macro_folder = macro_folder.expanduser()
-    module_file = Path(__file__).parent.absolute().resolve() / "Module1.xba"
-    shutil.copy(module_file, macro_folder)
+    if macro_folder is None:
+        platform_paths = {
+            "win32": Path(os.path.expandvars("%APPDATA%"), "LibreOffice/4/user/basic/Standard"),
+            "linux": Path("~/.config/libreoffice/4/user/basic/Standard").expanduser(),
+            "darwin": Path("~/Library/Application Support/LibreOffice/4/user/basic/Standard").expanduser()
+        }
+
+        try:
+            macro_folder = platform_paths[sys.platform]
+        except KeyError as e:
+            raise ValueError(f"Unsupported platform: {sys.platform}") from e
+
+    source_macro_path = Path(__file__).parent / "macros/Module1.xba"
+    target_macro_path = macro_folder / "Module1.xba"
+
+    source_macro_contents = os.linesep.join(source_macro_path.read_text().splitlines())  # ensure correct line endings
+    target_macro_contents = target_macro_path.read_text()
+
+    if source_macro_contents != target_macro_contents:
+        log.info(f"Overwriting LibreOffice macro at location {target_macro_path}")
+        target_macro_path.write_text(source_macro_contents)
+    else:
+        log.info("LibreOffice macro up to date")
 
 
 def update_toc(docx_file: Path | str) -> None:
-    """Update a TOC within a word document.
-
-    If you are on linux, please call `export_libre_macro` first.
     """
-    if isinstance(docx_file, str):
-        docx_file = Path(docx_file)
+    Update the table of contents and indexes within a Word document.
 
-    docx_file = docx_file.absolute().resolve()
+    https://github.com/python-openxml/python-docx/issues/1207#issuecomment-1924053420
+    """
+    docx_file = Path(docx_file).absolute().resolve()
+    callback: Callable[[Path], ...]
 
     if sys.platform == "linux":
-        _update_toc_linux(docx_file)
+        callback = _update_toc_linux
     elif sys.platform == "win32":
-        raise ValueError("Windows is not yet implemented yet.")
+        callback = _update_toc_windows
+    elif sys.platform == "darwin":
+        callback = _update_toc_macos
     else:
-        raise ValueError(f"{sys.platform} is not implemented")
+        raise ValueError(f"Unsupported platform: {sys.platform}")
+
+    with tempfile.TemporaryDirectory() as temp_dir:  # https://stackoverflow.com/questions/23212435
+        temp_path = Path(temp_dir, "temp.docx")
+
+        shutil.copy(docx_file, temp_path)
+        callback(temp_path)
+        shutil.copy(temp_path, docx_file)
+
+
+def _update_toc_linux(docx_file: Path) -> None:
+    """
+    Helper method for Linux (Call UpdateTOC binding on filepath))
+    """
+    subprocess.call(
+        [
+            "libreoffice",
+            "--headless",
+            f"macro:///Standard.Module1.UpdateTOC({docx_file})",
+        ],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+
+def _update_toc_windows(docx_file: Path) -> None:
+    """
+    Helper method for Windows (Call UpdateTOC binding on filepath)
+    """
+    subprocess.call(
+        [
+            "C:\\Program Files\\LibreOffice\\program\\soffice.exe",
+            f"macro:///Standard.Module1.UpdateTOC({docx_file})",
+        ],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+
+def _update_toc_macos(docx_file: Path) -> None:
+    """
+    Helper method for macOS (Call UpdateTOC binding on filepath)
+    """
+    subprocess.call(
+        [
+            "/Applications/LibreOffice.app/Contents/MacOS/soffice",
+            "--headless",
+            f"macro:///Standard.Module1.UpdateTOC({docx_file})",
+        ],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
 
 
 def document_to_pdf(docx_file: Path | str) -> None:
