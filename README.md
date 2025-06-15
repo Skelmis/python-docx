@@ -11,6 +11,8 @@ Key differences at a glance:
 - Supporting the ability to transform word documents into PDF's ([1](https://skelmis-docx.readthedocs.io/en/latest/api/utility.html#skelmis.docx.utility.document_to_pdf))
 - Horizontal rules + paragraph bounding boxes / borders ([1](https://skelmis-docx.readthedocs.io/en/latest/api/text.html#skelmis.docx.text.paragraph.Paragraph.insert_horizontal_rule), [2](https://skelmis-docx.readthedocs.io/en/latest/api/text.html#skelmis.docx.text.paragraph.Paragraph.draw_paragraph_border))
 - External hyperlinks ([1](https://skelmis-docx.readthedocs.io/en/latest/api/text.html#skelmis.docx.text.paragraph.Paragraph.add_external_hyperlink))
+- Internal hyperlinks (Linking to bookmarks) ([1](https://skelmis-docx.readthedocs.io/en/latest/api/text.html#skelmis.docx.text.paragraph.Paragraph.add_internal_hyperlink))
+- Creating bookmarks ([1](https://skelmis-docx.readthedocs.io/en/latest/api/text.html#skelmis.docx.text.paragraph.Paragraph.add_bookmark))
 - The ability to insert a customisable Table of Contents (ToC) ([1](https://skelmis-docx.readthedocs.io/en/latest/api/text.html#skelmis.docx.text.paragraph.Paragraph.insert_table_of_contents))
 
 ## Installation
