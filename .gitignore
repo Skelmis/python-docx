@@ -10,6 +10,7 @@ Session.vim
 /.tox/
 .idea
 uv.lock
+.python-version
 
 !src/docx/templates/default.docx
 test.py
