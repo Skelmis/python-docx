@@ -13,8 +13,4 @@ uv.lock
 .python-version
 
 !src/docx/templates/default.docx
-test.py
-cat.jpeg
-*.docx
-*.pdf
 test_functionality
