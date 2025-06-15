@@ -28,9 +28,7 @@ jobs:
       - name: Behave
         id: behave
         run: |
-          source .venv/bin/activate
-          echo "Running tox with python version $PYTHON_VERSION"
-          behave
+          uv run behave
 
   pytest:
     runs-on: ubuntu-latest
