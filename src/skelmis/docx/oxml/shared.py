@@ -6,7 +6,7 @@ from typing import cast
 
 from skelmis.docx.oxml.ns import qn
 from skelmis.docx.oxml.parser import OxmlElement
-from skelmis.docx.oxml.simpletypes import ST_DecimalNumber, ST_OnOff, ST_String, ST_LongHexNumber
+from skelmis.docx.oxml.simpletypes import ST_DecimalNumber, ST_LongHexNumber, ST_OnOff, ST_String
 from skelmis.docx.oxml.xmlchemy import BaseOxmlElement, OptionalAttribute, RequiredAttribute
 
 

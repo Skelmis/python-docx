@@ -188,20 +188,20 @@ class _MarkerFinder:
 
     def _next_non_ff_byte(self, start):
         """Return an offset, byte 2-tuple for the next byte in `stream` that is not
-        '\xFF', starting with the byte at offset `start`.
+        '\xff', starting with the byte at offset `start`.
 
-        If the byte at offset `start` is not '\xFF', `start` and the returned `offset`
+        If the byte at offset `start` is not '\xff', `start` and the returned `offset`
         will be the same.
         """
         self._stream.seek(start)
         byte_ = self._read_byte()
-        while byte_ == b"\xFF":
+        while byte_ == b"\xff":
             byte_ = self._read_byte()
         offset_of_non_ff_byte = self._stream.tell() - 1
         return offset_of_non_ff_byte, byte_
 
     def _offset_of_next_ff_byte(self, start):
-        """Return the offset of the next '\xFF' byte in `stream` starting with the byte
+        """Return the offset of the next '\xff' byte in `stream` starting with the byte
         at offset `start`.
 
         Returns `start` if the byte at that offset is a hex 255; it does not necessarily
@@ -209,7 +209,7 @@ class _MarkerFinder:
         """
         self._stream.seek(start)
         byte_ = self._read_byte()
-        while byte_ != b"\xFF":
+        while byte_ != b"\xff":
             byte_ = self._read_byte()
         offset_of_ff_byte = self._stream.tell() - 1
         return offset_of_ff_byte
@@ -255,15 +255,14 @@ class _Marker:
     def from_stream(cls, stream, marker_code, offset):
         """Return a generic |_Marker| instance for the marker at `offset` in `stream`
         having `marker_code`."""
-        if JPEG_MARKER_CODE.is_standalone(marker_code):
-            segment_length = 0
-        else:
-            segment_length = stream.read_short(offset)
+        segment_length = (
+            0 if JPEG_MARKER_CODE.is_standalone(marker_code) else stream.read_short(offset)
+        )
         return cls(marker_code, offset, segment_length)
 
     @property
     def marker_code(self):
-        """The single-byte code that identifies the type of this marker, e.g. ``'\xE0'``
+        """The single-byte code that identifies the type of this marker, e.g. ``'\xe0'``
         for start of image (SOI)."""
         return self._marker_code
 

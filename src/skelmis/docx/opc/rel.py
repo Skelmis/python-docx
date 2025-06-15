@@ -79,7 +79,7 @@ class Relationships(Dict[str, "_Relationship"]):
             if rel.is_external != is_external:
                 return False
             rel_target = rel.target_ref if rel.is_external else rel.target_part
-            if rel_target != target:
+            if rel_target != target:  # noqa: SIM103
                 return False
             return True
 

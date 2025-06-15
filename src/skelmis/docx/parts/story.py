@@ -6,7 +6,7 @@ from typing import IO, TYPE_CHECKING, Tuple, cast
 
 from skelmis.docx.opc.constants import RELATIONSHIP_TYPE as RT
 from skelmis.docx.opc.part import XmlPart
-from skelmis.docx.oxml.shape import CT_Inline, CT_Anchor
+from skelmis.docx.oxml.shape import CT_Anchor, CT_Inline
 from skelmis.docx.shared import Length, lazyproperty
 
 if TYPE_CHECKING:

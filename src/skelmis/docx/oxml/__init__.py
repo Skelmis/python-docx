@@ -22,7 +22,7 @@ from skelmis.docx.oxml.shape import (
     CT_ShapeProperties,
     CT_Transform2D,
 )
-from skelmis.docx.oxml.shared import CT_DecimalNumber, CT_OnOff, CT_String, CT_LongHexNumber
+from skelmis.docx.oxml.shared import CT_DecimalNumber, CT_LongHexNumber, CT_OnOff, CT_String
 from skelmis.docx.oxml.text.hyperlink import CT_Hyperlink
 from skelmis.docx.oxml.text.pagebreak import CT_LastRenderedPageBreak
 from skelmis.docx.oxml.text.run import (
@@ -93,19 +93,19 @@ from .document import CT_Body, CT_Document  # noqa
 register_element_cls("w:body", CT_Body)
 register_element_cls("w:document", CT_Document)
 
-from .numbering import (
+from .numbering import (  # noqa: E402
+    CT_AbstractNum,
+    CT_LevelSuffix,
+    CT_LevelText,
+    CT_Lvl,
+    CT_LvlLegacy,
+    CT_MultiLevelType,
     CT_Num,
     CT_Numbering,
-    CT_NumLvl,
-    CT_NumPr,
-    CT_LevelSuffix,
     CT_NumFmt,
-    CT_MultiLevelType,
-    CT_LvlLegacy,
-    CT_LevelText,
+    CT_NumLvl,
     CT_NumPicBullet,
-    CT_Lvl,
-    CT_AbstractNum,
+    CT_NumPr,
 )
 
 register_element_cls("w:abstractNumId", CT_DecimalNumber)

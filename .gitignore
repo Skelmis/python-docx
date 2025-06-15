@@ -9,7 +9,8 @@ _scratch/
 Session.vim
 /.tox/
 .idea
-poetry.lock
+uv.lock
+.python-version
 
 !src/docx/templates/default.docx
 test.py

@@ -3,6 +3,12 @@
 Release History
 ---------------
 
+2.2.1 (2025-06-15)
+++++++++++++++++++
+
+- Moves project from Poetry to uv
+- Re-add's relevant pypi homepage links
+
 2.2.0 (2025-06-15)
 ++++++++++++++++++
 

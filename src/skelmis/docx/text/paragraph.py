@@ -5,13 +5,13 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Iterator, List, cast
 
 from skelmis.docx.enum.style import WD_STYLE_TYPE
-from skelmis.docx.enum.text import WD_TAB_LEADER, WD_TAB_ALIGNMENT
+from skelmis.docx.enum.text import WD_TAB_ALIGNMENT, WD_TAB_LEADER
 from skelmis.docx.opc.constants import RELATIONSHIP_TYPE
 from skelmis.docx.opc.oxml import BaseOxmlElement
 from skelmis.docx.oxml import OxmlElement
 from skelmis.docx.oxml.ns import qn
 from skelmis.docx.oxml.text.run import CT_R
-from skelmis.docx.shared import StoryChild, Length
+from skelmis.docx.shared import Length, StoryChild
 from skelmis.docx.styles.style import ParagraphStyle
 from skelmis.docx.text.hyperlink import Hyperlink
 from skelmis.docx.text.pagebreak import RenderedPageBreak
@@ -49,14 +49,24 @@ class Paragraph(StoryChild):
         Insert a blank table of contents.
 
         :param levels: Number of headings to include. Default is 3.
-        :param starting_level: Starting heading level, useful if you want to only do say second heading levels and up. Default is 1.
+        :param starting_level: Starting heading level, useful if you want to only do say second
+            heading levels and up. Default is 1.
         :param format_table_as_links: If true, ToC entries are hyperlinks to within the document.
-        :param toc_width: The width of the table of contents. This essentially tells Word how much space between the ToC content and the page number. The default value is usually fine.
+        :param toc_width: The width of the table of contents.
+            This essentially tells Word how much space between the ToC
+            content and the page number. The default value is usually fine.
         :param show_page_numbers: If false, don't include page numbers within the toc.
-        :param hide_page_numbers_for_heading_range: Only show page numbers for headings outside of this range. Format is <start>-<stop>, i.e. 2-5 to only show page numbers for first level headings. ``show_page_numbers`` must be ``True`` for this setting to work.
-        :param fill_space_with: How to fill the remaining space on a line. Referred to technically as the tab stops.
-        :param hide_tab_leader_and_page_numbers_in_web_layout_view: Hides tab leader and page numbers in Web layout view.
-        :param styles: The paragraph styles to use instead of the built-in ones. Format is list[tuple[int(HeadingLevel), str(StyleName)]]. N.b this field follows the spec, but is not tested for correctness currently.
+        :param hide_page_numbers_for_heading_range: Only show page numbers for headings
+            outside of this range. Format is <start>-<stop>, i.e. 2-5 to only show
+            page numbers for first level headings. ``show_page_numbers`` must be
+            ``True`` for this setting to work.
+        :param fill_space_with: How to fill the remaining space on a line. Referred to
+            technically as the tab stops.
+        :param hide_tab_leader_and_page_numbers_in_web_layout_view: Hides tab leader
+            and page numbers in Web layout view.
+        :param styles: The paragraph styles to use instead of the built-in ones.
+            Format is list[tuple[int(HeadingLevel), str(StyleName)]]. N.b this field follows
+            the spec, but is not tested for correctness currently.
 
         Derived from the following comment: https://github.com/python-openxml/python-docx/issues/36#issuecomment-2739396561
 
@@ -147,9 +157,10 @@ class Paragraph(StoryChild):
 
             t_flag = f"\\t \"{','.join(entries)}\""
 
-        items[-1][
-            0
-        ].text = f' TOC \\o "{starting_level}-{levels}" {format_table_as_links} {t_flag} {z_flag} {n_flag} \\u '
+        items[-1][0].text = (
+            f' TOC \\o "{starting_level}-{levels}" {format_table_as_links} '
+            f"{t_flag} {z_flag} {n_flag} \\u "
+        )
         # <w:fldChar w:fldCharType="separate"/>
         items += [[OxmlElement("w:fldChar", attrs={qn("w:fldCharType"): "separate"})]]
         # <w:rPr>
@@ -225,7 +236,7 @@ class Paragraph(StoryChild):
         rPr = OxmlElement("w:rPr")
 
         # Add color if it is given
-        if not color is None:
+        if color is not None:
             c = OxmlElement("w:color")
             c.set(qn("w:val"), color)
             rPr.append(c)
@@ -311,7 +322,7 @@ class Paragraph(StoryChild):
             "w:pPrChange",
         )
         if top:
-            top_s = OxmlElement(f"w:top")
+            top_s = OxmlElement("w:top")
             top_s.set(qn("w:val"), "single")
             top_s.set(qn("w:sz"), "6")
             top_s.set(qn("w:space"), "1")
@@ -319,7 +330,7 @@ class Paragraph(StoryChild):
             pBdr.append(top_s)
 
         if bottom:
-            bottom_s = OxmlElement(f"w:bottom")
+            bottom_s = OxmlElement("w:bottom")
             bottom_s.set(qn("w:val"), "single")
             bottom_s.set(qn("w:sz"), "6")
             bottom_s.set(qn("w:space"), "1")
@@ -327,7 +338,7 @@ class Paragraph(StoryChild):
             pBdr.append(bottom_s)
 
         if left:
-            left_s = OxmlElement(f"w:left")
+            left_s = OxmlElement("w:left")
             left_s.set(qn("w:val"), "single")
             left_s.set(qn("w:sz"), "6")
             left_s.set(qn("w:space"), "1")
@@ -335,7 +346,7 @@ class Paragraph(StoryChild):
             pBdr.append(left_s)
 
         if right:
-            right_s = OxmlElement(f"w:right")
+            right_s = OxmlElement("w:right")
             right_s.set(qn("w:val"), "single")
             right_s.set(qn("w:sz"), "6")
             right_s.set(qn("w:space"), "1")
