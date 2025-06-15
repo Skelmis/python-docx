@@ -60,11 +60,13 @@ class Paragraph(StoryChild):
             outside of this range. Format is <start>-<stop>, i.e. 2-5 to only show
             page numbers for first level headings. ``show_page_numbers`` must be
             ``True`` for this setting to work.
-        :param fill_space_with: How to fill the remaining space on a line. Referred to technically as the tab stops.
-        :param hide_tab_leader_and_page_numbers_in_web_layout_view: Hides tab leader and page numbers in Web layout view.
+        :param fill_space_with: How to fill the remaining space on a line. Referred to
+            technically as the tab stops.
+        :param hide_tab_leader_and_page_numbers_in_web_layout_view: Hides tab leader
+            and page numbers in Web layout view.
         :param styles: The paragraph styles to use instead of the built-in ones.
-            Format is list[tuple[int(HeadingLevel), str(StyleName)]]. N.b this field follows the spec,
-            but is not tested for correctness currently.
+            Format is list[tuple[int(HeadingLevel), str(StyleName)]]. N.b this field follows
+            the spec, but is not tested for correctness currently.
 
         Derived from the following comment: https://github.com/python-openxml/python-docx/issues/36#issuecomment-2739396561
 
