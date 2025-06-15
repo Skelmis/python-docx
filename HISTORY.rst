@@ -3,6 +3,11 @@
 Release History
 ---------------
 
+2.2.0 (2025-06-15)
+++++++++++++++++++
+
+- Implement support for Table of Contents
+
 2.1.0 (2025-03-01)
 ++++++++++++++++++
 

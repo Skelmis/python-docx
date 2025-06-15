@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "skelmis-docx"
-version = "2.1.0"
+version = "2.2.0"
 description = "Create, read, and update Microsoft Word .docx files."
 authors = ["Skelmis <skelmis.craft@gmail.com>"]
 license = "MIT"
