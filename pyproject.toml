@@ -6,11 +6,30 @@ authors = [{ name = "Skelmis", email = "skelmis.craft@gmail.com" }]
 requires-python = "~=3.10"
 readme = "README.md"
 license = "MIT"
+keywords = ["Docx"]
 dependencies = [
     "lxml>=3.1.0",
     "typing-extensions>=4.12.2,<5",
     "pywin32==307 ; sys_platform == 'windows'",
 ]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+
+  # Specify the Python versions you support here.
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Homepage = "https://github.com/skelmis/python-docx"
+Documentation = "https://skelmis-docx.readthedocs.io/en/latest/"
+"Issue tracker" = "https://github.com/Skelmis/python-docx/issues"
+Changelog = "https://github.com/Skelmis/python-docx/blob/master/HISTORY.rst"
+
 
 [dependency-groups]
 dev = [
