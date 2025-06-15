@@ -33,17 +33,16 @@ class Paragraph(StoryChild):
         super(Paragraph, self).__init__(parent)
         self._p = self._element = p
 
+    # noinspection PyTypeChecker
     def add_internal_hyperlink(
         self,
         bookmark_name: str,
         display_text: str,
-        tool_tip: str | None = None,
     ) -> Hyperlink:
         """Add an internal hyperlink to a bookmark within the document.
 
         :param bookmark_name: The name of the bookmark as provided to ``add_bookmark``.
         :param display_text: The display text to put in the document and associate with this link.
-        :param tool_tip: The text to show on hover. If not set, defaults to ``#bookmark_name``
         """
         hyperlink = OxmlElement("w:hyperlink")
 
@@ -52,18 +51,10 @@ class Paragraph(StoryChild):
             bookmark_name,
         )
 
-        if tool_tip is not None:
-            hyperlink.set(
-                qn("w:tooltip"),
-                tool_tip,
-            )
-
         new_run = OxmlElement("w:r")
-        r_pr = OxmlElement("w:rPr")
-        new_run.append(r_pr)
+        new_run.append(OxmlElement("w:rPr"))
         new_run.text = display_text
         hyperlink.append(new_run)
-        # noinspection PyTypeChecker
         self._p.append(hyperlink)
         return Hyperlink(hyperlink, self)
 
@@ -275,6 +266,7 @@ class Paragraph(StoryChild):
                 # noinspection PyProtectedMember
                 run._r.append(item)
 
+    # noinspection PyTypeChecker
     def add_external_hyperlink(
         self,
         url: str,
