@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import io
 from typing import TYPE_CHECKING, Iterator, List, cast, Literal
 
 from skelmis.docx.enum.style import WD_STYLE_TYPE
@@ -37,16 +38,10 @@ class Paragraph(StoryChild):
         *,
         levels: int = 3,
         starting_level: int = 1,
-        styles: Literal[
-            "Current",
-            "Simple",
-            "Online",
-            "Standard",
-            "Modern",
-            "Classic",
-        ] = "Current",
+        styles: list[tuple[int, str]] | None = None,
         format_table_as_links: bool = True,
         show_page_numbers: bool = True,
+        hide_page_numbers_for_heading_range: str | None = None,
         fill_space_with: WD_TAB_LEADER = WD_TAB_LEADER.SPACES,
         toc_width: Length | None = None,
         hide_tab_leader_and_page_numbers_in_web_layout_view: bool = False,
@@ -56,9 +51,13 @@ class Paragraph(StoryChild):
 
         :param levels: Number of headings to include. Default is 3.
         :param starting_level: Starting heading level, useful if you want to only do say second heading levels and up. Default is 1.
+        :param format_table_as_links: If true, ToC entries are hyperlinks to within the document.
         :param toc_width: The width of the table of contents. This essentially tells Word how much space between the ToC content and the page number. The default value is usually fine.
+        :param show_page_numbers: If false, don't include page numbers within the toc.
+        :param hide_page_numbers_for_heading_range: Only show page numbers for headings outside of this range. Format is <start>-<stop>, i.e. 2-5 to only show page numbers for first level headings. ``show_page_numbers`` must be ``True`` for this setting to work.
         :param fill_space_with: How to fill the remaining space on a line. Referred to technically as the tab stops.
         :param hide_tab_leader_and_page_numbers_in_web_layout_view: Hides tab leader and page numbers in Web layout view.
+        :param styles: The paragraph styles to use instead of the built-in ones. Format is list[tuple[int(HeadingLevel), str(StyleName)]]. N.b this field follows the spec, but is not tested for correctness currently.
 
         Derived from the following comment: https://github.com/python-openxml/python-docx/issues/36#issuecomment-2739396561
 
@@ -131,9 +130,27 @@ class Paragraph(StoryChild):
         # MERGEFORMAT switches are as defined here: http://officeopenxml.com/WPtableOfContents.php
         format_table_as_links: str = "\\h" if format_table_as_links is True else ""
         z_flag = "\\z" if hide_tab_leader_and_page_numbers_in_web_layout_view is True else ""
+        n_flag = "" if show_page_numbers is True else "\\n"
+        if hide_page_numbers_for_heading_range is not None:
+            if show_page_numbers is False:
+                raise ValueError(
+                    "hide_page_numbers_for_heading_range "
+                    "and show_page_numbers are mutually exclusive options."
+                )
+
+            n_flag = f"\\n {hide_page_numbers_for_heading_range}"
+
+        t_flag: str = ""
+        if styles is not None:
+            entries = []
+            for heading, style in sorted(styles, key=lambda s: s[0]):
+                entries.append(f"{style},{heading}")
+
+            t_flag = f"\\t \"{','.join(entries)}\""
+
         items[-1][
             0
-        ].text = f' TOC \\o "{starting_level}-{levels}" {format_table_as_links} {z_flag} \\u '
+        ].text = f' TOC \\o "{starting_level}-{levels}" {format_table_as_links} {t_flag} {z_flag} {n_flag} \\u '
         # <w:fldChar w:fldCharType="separate"/>
         items += [[OxmlElement("w:fldChar", attrs={qn("w:fldCharType"): "separate"})]]
         # <w:rPr>
