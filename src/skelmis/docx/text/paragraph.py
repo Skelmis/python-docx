@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING, Iterator, List, cast
 
 from skelmis.docx.enum.style import WD_STYLE_TYPE
@@ -37,7 +38,7 @@ class Paragraph(StoryChild):
         bookmark_name: str,
         display_text: str,
         tool_tip: str | None = None,
-    ):
+    ) -> Hyperlink:
         """Add an internal hyperlink to a bookmark within the document.
 
         :param bookmark_name: The name of the bookmark as provided to ``add_bookmark``.
@@ -64,6 +65,7 @@ class Paragraph(StoryChild):
         hyperlink.append(new_run)
         # noinspection PyTypeChecker
         self._p.append(hyperlink)
+        return Hyperlink(hyperlink, self)
 
     def add_bookmark(self, name: str, display_text: str | None = None, *, bookmark_id=None):
         """Add a bookmark to the document for later linking to.
@@ -80,7 +82,7 @@ class Paragraph(StoryChild):
         if bookmark_id is None:
             # ID should be unique,
             # so we make an assumption name also is and call it a day
-            bookmark_id = name
+            bookmark_id = re.sub(r"\s+", "_", name)
 
         self._start_bookmark(name, bookmark_id)
 
@@ -90,7 +92,7 @@ class Paragraph(StoryChild):
             # noinspection PyTypeChecker
             self._p.append(text)
 
-        self._end_bookmark(name, bookmark_id)
+        self._end_bookmark(bookmark_id)
 
     def _start_bookmark(self, name: str, bookmark_id):
         """Add's a 'bookmarkStart' entry."""
@@ -101,11 +103,10 @@ class Paragraph(StoryChild):
         # noinspection PyTypeChecker
         self._p.append(start)
 
-    def _end_bookmark(self, name: str, bookmark_id):
+    def _end_bookmark(self, bookmark_id):
         """Add's a 'bookmarkEnd' entry."""
         end = OxmlElement("w:bookmarkEnd")
         end.set(qn("w:id"), bookmark_id)
-        end.set(qn("w:name"), name)
         # noinspection PyTypeChecker
         self._p.append(end)
 
