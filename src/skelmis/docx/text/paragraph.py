@@ -2,19 +2,21 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Iterator, List, cast, Literal
+from typing import TYPE_CHECKING, Iterator, List, cast
 
 from skelmis.docx.enum.style import WD_STYLE_TYPE
+from skelmis.docx.enum.text import WD_TAB_LEADER, WD_TAB_ALIGNMENT
+from skelmis.docx.opc.constants import RELATIONSHIP_TYPE
+from skelmis.docx.opc.oxml import BaseOxmlElement
 from skelmis.docx.oxml import OxmlElement
 from skelmis.docx.oxml.ns import qn
 from skelmis.docx.oxml.text.run import CT_R
-from skelmis.docx.shared import StoryChild
+from skelmis.docx.shared import StoryChild, Length
 from skelmis.docx.styles.style import ParagraphStyle
 from skelmis.docx.text.hyperlink import Hyperlink
 from skelmis.docx.text.pagebreak import RenderedPageBreak
 from skelmis.docx.text.parfmt import ParagraphFormat
 from skelmis.docx.text.run import Run
-from skelmis.docx.opc.constants import RELATIONSHIP_TYPE
 
 if TYPE_CHECKING:
     import skelmis.docx.types as t
@@ -29,6 +31,160 @@ class Paragraph(StoryChild):
     def __init__(self, p: CT_P, parent: t.ProvidesStoryPart):
         super(Paragraph, self).__init__(parent)
         self._p = self._element = p
+
+    def insert_table_of_contents(
+        self,
+        *,
+        levels: int = 3,
+        starting_level: int = 1,
+        styles: list[tuple[int, str]] | None = None,
+        format_table_as_links: bool = True,
+        show_page_numbers: bool = True,
+        hide_page_numbers_for_heading_range: str | None = None,
+        fill_space_with: WD_TAB_LEADER = WD_TAB_LEADER.SPACES,
+        toc_width: Length | None = None,
+        hide_tab_leader_and_page_numbers_in_web_layout_view: bool = False,
+    ):
+        r"""
+        Insert a blank table of contents.
+
+        :param levels: Number of headings to include. Default is 3.
+        :param starting_level: Starting heading level, useful if you want to only do say second heading levels and up. Default is 1.
+        :param format_table_as_links: If true, ToC entries are hyperlinks to within the document.
+        :param toc_width: The width of the table of contents. This essentially tells Word how much space between the ToC content and the page number. The default value is usually fine.
+        :param show_page_numbers: If false, don't include page numbers within the toc.
+        :param hide_page_numbers_for_heading_range: Only show page numbers for headings outside of this range. Format is <start>-<stop>, i.e. 2-5 to only show page numbers for first level headings. ``show_page_numbers`` must be ``True`` for this setting to work.
+        :param fill_space_with: How to fill the remaining space on a line. Referred to technically as the tab stops.
+        :param hide_tab_leader_and_page_numbers_in_web_layout_view: Hides tab leader and page numbers in Web layout view.
+        :param styles: The paragraph styles to use instead of the built-in ones. Format is list[tuple[int(HeadingLevel), str(StyleName)]]. N.b this field follows the spec, but is not tested for correctness currently.
+
+        Derived from the following comment: https://github.com/python-openxml/python-docx/issues/36#issuecomment-2739396561
+
+        Raw XML to insert:
+        ```xml
+        <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+            <w:pPr>
+                <w:tabs>
+                    <w:tab w:val="right" w:leader="dot" w:pos="8640"/>
+                </w:tabs>
+            </w:pPr>
+            <w:r>
+                <w:fldChar w:fldCharType="begin"/>
+            </w:r>
+            <w:r>
+                <w:instrText xml:space="preserve"> TOC \o "1-3" \h \z \u </w:instrText>
+            </w:r>
+            <w:r>
+                <w:fldChar w:fldCharType="separate"/>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:b/>
+                    <w:bCs/>
+                    <w:noProof/>
+                    <w:lang w:val="en-US"/>
+                </w:rPr>
+                <w:t>Right click to update TOC</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:b/>
+                    <w:bCs/>
+                    <w:noProof/>
+                </w:rPr>
+                <w:fldChar w:fldCharType="end"/>
+            </w:r>
+        </w:p>
+        ```
+        """
+        # <w:tab w:val="right" w:leader="dot" w:pos="8640"/>
+        # Pos here is how wide to make the tabs.
+        #   I.e. if we want to make this the width of the page
+        #   then we need to set the tab stop to the max page width or close
+        #   If too wide then it will spill over lines
+        if toc_width is not None or fill_space_with != WD_TAB_LEADER.SPACES:
+            # We don't always add this as by default word with auto
+            # calculate the width which is a better way to do it if defaults are provided
+            if toc_width is None:
+                # Best guess at expected 'default' width
+                # noinspection PyUnresolvedReferences,PyProtectedMember
+                base_section = self._parent._parent.sections[0]
+                toc_width = base_section.page_width - (
+                    base_section.right_margin + base_section.left_margin
+                )
+
+            self.paragraph_format.tab_stops.add_tab_stop(
+                toc_width, WD_TAB_ALIGNMENT.RIGHT, fill_space_with
+            )
+
+        # noinspection PyListCreation
+        items: list[list[BaseOxmlElement]] = []
+
+        # <w:fldChar w:fldCharType="begin"/>
+        items += [[OxmlElement("w:fldChar", attrs={qn("w:fldCharType"): "begin"})]]
+
+        # <w:instrText xml:space="preserve"> TOC \o "1-3" \h \z \u </w:instrText>
+        items += [[OxmlElement("w:instrText", attrs={qn("xml:space"): "preserve"})]]
+
+        # MERGEFORMAT switches are as defined here: http://officeopenxml.com/WPtableOfContents.php
+        format_table_as_links: str = "\\h" if format_table_as_links is True else ""
+        z_flag = "\\z" if hide_tab_leader_and_page_numbers_in_web_layout_view is True else ""
+        n_flag = "" if show_page_numbers is True else "\\n"
+        if hide_page_numbers_for_heading_range is not None:
+            if show_page_numbers is False:
+                raise ValueError(
+                    "hide_page_numbers_for_heading_range "
+                    "and show_page_numbers are mutually exclusive options."
+                )
+
+            n_flag = f"\\n {hide_page_numbers_for_heading_range}"
+
+        t_flag: str = ""
+        if styles is not None:
+            entries = []
+            for heading, style in sorted(styles, key=lambda s: s[0]):
+                entries.append(f"{style},{heading}")
+
+            t_flag = f"\\t \"{','.join(entries)}\""
+
+        items[-1][
+            0
+        ].text = f' TOC \\o "{starting_level}-{levels}" {format_table_as_links} {t_flag} {z_flag} {n_flag} \\u '
+        # <w:fldChar w:fldCharType="separate"/>
+        items += [[OxmlElement("w:fldChar", attrs={qn("w:fldCharType"): "separate"})]]
+        # <w:rPr>
+        #     <w:b/>
+        #     <w:bCs/>
+        #     <w:noProof/>
+        #     <w:lang w:val="en-US"/>
+        # </w:rPr>
+        # <w:t>No table of contents entries found.</w:t>
+        items += [[OxmlElement("w:rPr"), OxmlElement("w:t")]]
+        items[-1][0].append(OxmlElement("w:b"))
+        items[-1][0].append(OxmlElement("w:bCs"))
+        items[-1][0].append(OxmlElement("w:noProof"))
+        items[-1][0].append(OxmlElement("w:lang", attrs={qn("w:val"): "en-US"}))
+        items[-1][1].text = "Right click to update TOC"
+
+        # <w:rPr>
+        #     <w:b/>
+        #     <w:bCs/>
+        #     <w:noProof/>
+        # </w:rPr>
+        # <w:fldChar w:fldCharType="end"/>
+        items += [
+            [OxmlElement("w:rPr"), OxmlElement("w:fldChar", attrs={qn("w:fldCharType"): "end"})]
+        ]
+        items[-1][0].append(OxmlElement("w:b"))
+        items[-1][0].append(OxmlElement("w:bCs"))
+        items[-1][0].append(OxmlElement("w:noProof"))
+
+        for run_contents in items:
+            run = self.add_run()
+
+            for item in run_contents:
+                # noinspection PyProtectedMember
+                run._r.append(item)
 
     def add_external_hyperlink(
         self,
