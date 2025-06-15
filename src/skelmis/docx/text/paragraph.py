@@ -2,22 +2,21 @@
 
 from __future__ import annotations
 
-import io
-from typing import TYPE_CHECKING, Iterator, List, cast, Literal
+from typing import TYPE_CHECKING, Iterator, List, cast
 
 from skelmis.docx.enum.style import WD_STYLE_TYPE
+from skelmis.docx.enum.text import WD_TAB_LEADER, WD_TAB_ALIGNMENT
+from skelmis.docx.opc.constants import RELATIONSHIP_TYPE
 from skelmis.docx.opc.oxml import BaseOxmlElement
 from skelmis.docx.oxml import OxmlElement
 from skelmis.docx.oxml.ns import qn
 from skelmis.docx.oxml.text.run import CT_R
-from skelmis.docx.shared import StoryChild, Inches, Cm, Length
+from skelmis.docx.shared import StoryChild, Length
 from skelmis.docx.styles.style import ParagraphStyle
 from skelmis.docx.text.hyperlink import Hyperlink
 from skelmis.docx.text.pagebreak import RenderedPageBreak
 from skelmis.docx.text.parfmt import ParagraphFormat
 from skelmis.docx.text.run import Run
-from skelmis.docx.opc.constants import RELATIONSHIP_TYPE
-from skelmis.docx.enum.text import WD_TAB_LEADER, WD_TAB_ALIGNMENT
 
 if TYPE_CHECKING:
     import skelmis.docx.types as t
