@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING, Iterator, List, cast
 
 from skelmis.docx.enum.style import WD_STYLE_TYPE
@@ -31,6 +32,74 @@ class Paragraph(StoryChild):
     def __init__(self, p: CT_P, parent: t.ProvidesStoryPart):
         super(Paragraph, self).__init__(parent)
         self._p = self._element = p
+
+    # noinspection PyTypeChecker
+    def add_internal_hyperlink(
+        self,
+        bookmark_name: str,
+        display_text: str,
+    ) -> Hyperlink:
+        """Add an internal hyperlink to a bookmark within the document.
+
+        :param bookmark_name: The name of the bookmark as provided to ``add_bookmark``.
+        :param display_text: The display text to put in the document and associate with this link.
+        """
+        hyperlink = OxmlElement("w:hyperlink")
+
+        hyperlink.set(
+            qn("w:anchor"),
+            bookmark_name,
+        )
+
+        new_run = OxmlElement("w:r")
+        new_run.append(OxmlElement("w:rPr"))
+        new_run.text = display_text
+        hyperlink.append(new_run)
+        self._p.append(hyperlink)
+        return Hyperlink(hyperlink, self)
+
+    def add_bookmark(self, name: str, display_text: str | None = None, *, bookmark_id=None):
+        """Add a bookmark to the document for later linking to.
+
+        Note that this method does not support bookmarking against various cells in a table.
+        Currently only paragraph based textual bookmarks are supported.
+
+        :param name: The name of the bookmark. Unless ``bookmark_id`` is also set
+            this name should be unique across the document.
+        :param display_text: The text to display; and associate with; alongside the bookmark.
+        :param bookmark_id: If you don't want the internal bookmark ID to be
+            set to the ``name`` parameter, set this.
+        """
+        if bookmark_id is None:
+            # ID should be unique,
+            # so we make an assumption name also is and call it a day
+            bookmark_id = re.sub(r"\s+", "_", name)
+
+        self._start_bookmark(name, bookmark_id)
+
+        if display_text is not None:
+            text = OxmlElement("w:r")
+            text.text = display_text
+            # noinspection PyTypeChecker
+            self._p.append(text)
+
+        self._end_bookmark(bookmark_id)
+
+    def _start_bookmark(self, name: str, bookmark_id):
+        """Add's a 'bookmarkStart' entry."""
+        # http://officeopenxml.com/WPbookmark.php
+        start = OxmlElement("w:bookmarkStart")
+        start.set(qn("w:id"), bookmark_id)
+        start.set(qn("w:name"), name)
+        # noinspection PyTypeChecker
+        self._p.append(start)
+
+    def _end_bookmark(self, bookmark_id):
+        """Add's a 'bookmarkEnd' entry."""
+        end = OxmlElement("w:bookmarkEnd")
+        end.set(qn("w:id"), bookmark_id)
+        # noinspection PyTypeChecker
+        self._p.append(end)
 
     def insert_table_of_contents(
         self,
@@ -197,6 +266,7 @@ class Paragraph(StoryChild):
                 # noinspection PyProtectedMember
                 run._r.append(item)
 
+    # noinspection PyTypeChecker
     def add_external_hyperlink(
         self,
         url: str,

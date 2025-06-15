@@ -3,6 +3,12 @@
 Release History
 ---------------
 
+2.3.0 (2025-06-15)
+++++++++++++++++++
+
+* Implement support to add bookmarks in a paragraph
+* Implement support for creating internal hyperlinks to bookmarks
+
 2.2.2 (2025-06-15)
 ++++++++++++++++++
 
