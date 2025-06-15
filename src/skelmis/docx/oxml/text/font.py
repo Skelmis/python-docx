@@ -253,7 +253,7 @@ class CT_RPr(BaseOxmlElement):
         vertAlign = self.vertAlign
         if vertAlign is None:
             return None
-        if vertAlign.val == ST_VerticalAlignRun.SUBSCRIPT:
+        if vertAlign.val == ST_VerticalAlignRun.SUBSCRIPT:  # noqa: SIM103
             return True
         return False
 
@@ -277,7 +277,7 @@ class CT_RPr(BaseOxmlElement):
         vertAlign = self.vertAlign
         if vertAlign is None:
             return None
-        if vertAlign.val == ST_VerticalAlignRun.SUPERSCRIPT:
+        if vertAlign.val == ST_VerticalAlignRun.SUPERSCRIPT:  # noqa: SIM103
             return True
         return False
 

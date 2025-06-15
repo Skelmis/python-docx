@@ -12,11 +12,11 @@ from skelmis.docx.styles import BabelFish
 from skelmis.docx.styles.latent import LatentStyles
 from skelmis.docx.styles.style import (
     BaseStyle,
-    StyleFactory,
-    ParagraphStyle,
     CharacterStyle,
-    _TableStyle,
+    ParagraphStyle,
+    StyleFactory,
     _NumberingStyle,
+    _TableStyle,
 )
 
 

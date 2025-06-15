@@ -34,17 +34,17 @@ Changelog = "https://github.com/Skelmis/python-docx/blob/master/HISTORY.rst"
 [dependency-groups]
 dev = [
     "build>=1.2.1,<2",
-    "ruff>=0.5.7,<0.6",
-    "setuptools>=72.2.0,<73",
+    "ruff>=0.11.13",
+    "setuptools>=80.9.0",
     "tox>=4.18.0,<5",
-    "twine>=5.1.1,<6",
-    "types-lxml>=2024.8.7,<2025",
+    "twine>=6.1.0",
+    "types-lxml>=2024.8.7",
     "behave>=1.2.6,<2",
     "pyparsing>=3.1.2,<4",
     "pytest>=8.3.2,<9",
     "pytest-coverage>=0.0,<0.1",
     "pytest-xdist>=3.6.1,<4",
-    "black>=24.10.0,<25",
+    "black>=25.1.0",
 ]
 docs = ["sphinx>=8.0.2,<9"]
 
@@ -110,14 +110,13 @@ python_functions = ["it_", "its_", "they_", "and_", "but_"]
 
 [tool.ruff]
 exclude = []
-line-length = 100
+line-length = 125
 target-version = "py310"
 
 [tool.ruff.lint]
 ignore = [
     "COM812",   # -- over-aggressively insists on trailing commas where not desired --
     "PT001",    # -- wants @pytest.fixture() instead of @pytest.fixture --
-    "PT005",    # -- wants @pytest.fixture() instead of @pytest.fixture --
 ]
 select = [
     "C4",       # -- flake8-comprehensions --

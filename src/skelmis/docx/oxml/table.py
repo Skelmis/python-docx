@@ -613,7 +613,7 @@ class CT_Tc(BaseOxmlElement):
         # -- cell must include at least one block item but can be a `w:tbl`, `w:sdt`,
         # -- `w:customXml` or a `w:p`
         only_item = block_items[0]
-        if isinstance(only_item, CT_P) and len(only_item.r_lst) == 0:
+        if isinstance(only_item, CT_P) and len(only_item.r_lst) == 0:  # noqa: SIM103
             return True
         return False
 

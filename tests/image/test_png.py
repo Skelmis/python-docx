@@ -401,7 +401,7 @@ class Describe_IHDRChunk:
 
     @pytest.fixture
     def from_offset_fixture(self):
-        bytes_ = b"\x00\x00\x00\x2A\x00\x00\x00\x18"
+        bytes_ = b"\x00\x00\x00\x2a\x00\x00\x00\x18"
         stream_rdr = StreamReader(io.BytesIO(bytes_), BIG_ENDIAN)
         offset, px_width, px_height = 0, 42, 24
         return stream_rdr, offset, px_width, px_height
@@ -422,7 +422,7 @@ class Describe_pHYsChunk:
 
     @pytest.fixture
     def from_offset_fixture(self):
-        bytes_ = b"\x00\x00\x00\x2A\x00\x00\x00\x18\x01"
+        bytes_ = b"\x00\x00\x00\x2a\x00\x00\x00\x18\x01"
         stream_rdr = StreamReader(io.BytesIO(bytes_), BIG_ENDIAN)
         offset, horz_px_per_unit, vert_px_per_unit, units_specifier = (0, 42, 24, 1)
         return (stream_rdr, offset, horz_px_per_unit, vert_px_per_unit, units_specifier)

@@ -51,7 +51,7 @@ class Document(ElementProxy):
         STYP = skelmis.docx.enum.style.WD_STYLE_TYPE
         num_xml = self.part.numbering_part.element
         next_abstract_id = max([J.abstractNumId for J in num_xml.abstractNum_lst]) + 1
-        l = num_xml._new_abstractNum()
+        l = num_xml._new_abstractNum()  # noqa: E741
         l.abstractNumId = next_abstract_id
         l.add_multiLevelType().val = "multilevel"
 

@@ -420,7 +420,7 @@ class Describe_AsciiIfdEntry:
 
 class Describe_ShortIfdEntry:
     def it_can_parse_a_short_int_IFD_entry(self):
-        bytes_ = b"foobaroo\x00\x2A"
+        bytes_ = b"foobaroo\x00\x2a"
         stream_rdr = StreamReader(io.BytesIO(bytes_), BIG_ENDIAN)
         val = _ShortIfdEntry._parse_value(stream_rdr, 0, 1, None)
         assert val == 42
@@ -428,7 +428,7 @@ class Describe_ShortIfdEntry:
 
 class Describe_LongIfdEntry:
     def it_can_parse_a_long_int_IFD_entry(self):
-        bytes_ = b"foobaroo\x00\x00\x00\x2A"
+        bytes_ = b"foobaroo\x00\x00\x00\x2a"
         stream_rdr = StreamReader(io.BytesIO(bytes_), BIG_ENDIAN)
         val = _LongIfdEntry._parse_value(stream_rdr, 0, 1, None)
         assert val == 42
@@ -436,7 +436,7 @@ class Describe_LongIfdEntry:
 
 class Describe_RationalIfdEntry:
     def it_can_parse_a_rational_IFD_entry(self):
-        bytes_ = b"\x00\x00\x00\x2A\x00\x00\x00\x54"
+        bytes_ = b"\x00\x00\x00\x2a\x00\x00\x00\x54"
         stream_rdr = StreamReader(io.BytesIO(bytes_), BIG_ENDIAN)
         val = _RationalIfdEntry._parse_value(stream_rdr, None, 1, 0)
         assert val == 0.5

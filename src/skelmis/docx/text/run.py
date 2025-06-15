@@ -11,7 +11,7 @@ from skelmis.docx.enum.text import WD_BREAK
 from skelmis.docx.oxml.drawing import CT_Drawing
 from skelmis.docx.oxml.text.pagebreak import CT_LastRenderedPageBreak
 from skelmis.docx.shape import InlineShape
-from skelmis.docx.shared import StoryChild, Inches, Pt
+from skelmis.docx.shared import Inches, Pt, StoryChild
 from skelmis.docx.styles.style import CharacterStyle
 from skelmis.docx.text.font import Font
 from skelmis.docx.text.pagebreak import RenderedPageBreak

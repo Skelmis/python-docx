@@ -57,7 +57,7 @@ class XmlString(str):
         lines_other = other.splitlines()
         if len(lines) != len(lines_other):
             return False
-        for line, line_other in zip(lines, lines_other):
+        for line, line_other in zip(lines, lines_other):  # noqa: SIM110
             if not self._eq_elm_strs(line, line_other):
                 return False
         return True
@@ -85,7 +85,7 @@ class XmlString(str):
             return False
         if close != close_2:
             return False
-        if text != text_2:
+        if text != text_2:  # noqa: SIM103
             return False
         return True
 

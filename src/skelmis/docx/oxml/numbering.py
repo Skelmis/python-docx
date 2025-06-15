@@ -5,22 +5,22 @@ from skelmis.docx.oxml.shared import CT_DecimalNumber
 from skelmis.docx.oxml.simpletypes import (
     ST_DecimalNumber,
     ST_LevelSuffix,
-    ST_NumberFormat,
-    ST_String,
-    ST_MultiLevelType,
-    ST_TwipsMeasure,
-    ST_SignedTwipsMeasure,
-    ST_OnOff,
     ST_LongHexNumber,
+    ST_MultiLevelType,
+    ST_NumberFormat,
+    ST_OnOff,
+    ST_SignedTwipsMeasure,
+    ST_String,
+    ST_TwipsMeasure,
 )
 from skelmis.docx.oxml.xmlchemy import (
     BaseOxmlElement,
+    Choice,
     OneAndOnlyOne,
+    OptionalAttribute,
     RequiredAttribute,
     ZeroOrMore,
     ZeroOrOne,
-    OptionalAttribute,
-    Choice,
 )
 
 
