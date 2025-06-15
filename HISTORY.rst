@@ -3,6 +3,11 @@
 Release History
 ---------------
 
+2.2.2 (2025-06-15)
+++++++++++++++++++
+
+* Resolve a Hatch build issue where the default `document.docx` file was not shipped in builds
+
 2.2.1 (2025-06-15)
 ++++++++++++++++++
 
