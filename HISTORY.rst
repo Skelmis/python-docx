@@ -3,6 +3,11 @@
 Release History
 ---------------
 
+2.4.0 (2025-07-08)
+++++++++++++++++++
+
+* If a bookmark is created with text, return a `Run` object so the text can be edited / styled
+
 2.3.0 (2025-06-15)
 ++++++++++++++++++
 
