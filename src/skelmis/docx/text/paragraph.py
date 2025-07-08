@@ -58,7 +58,10 @@ class Paragraph(StoryChild):
         self._p.append(hyperlink)
         return Hyperlink(hyperlink, self)
 
-    def add_bookmark(self, name: str, display_text: str | None = None, *, bookmark_id=None):
+    # noinspection PyUnboundLocalVariable
+    def add_bookmark(
+        self, name: str, display_text: str | None = None, *, bookmark_id=None
+    ) -> Run | None:
         """Add a bookmark to the document for later linking to.
 
         Note that this method does not support bookmarking against various cells in a table.
@@ -69,6 +72,8 @@ class Paragraph(StoryChild):
         :param display_text: The text to display; and associate with; alongside the bookmark.
         :param bookmark_id: If you don't want the internal bookmark ID to be
             set to the ``name`` parameter, set this.
+        :returns: If display_text is not None, a Run of the text is returned else None
+        :rtype: Run | None
         """
         if bookmark_id is None:
             # ID should be unique,
@@ -78,12 +83,13 @@ class Paragraph(StoryChild):
         self._start_bookmark(name, bookmark_id)
 
         if display_text is not None:
-            text = OxmlElement("w:r")
-            text.text = display_text
-            # noinspection PyTypeChecker
-            self._p.append(text)
+            run = self.add_run(display_text)
 
         self._end_bookmark(bookmark_id)
+
+        if display_text is not None:
+            return run
+        return None
 
     def _start_bookmark(self, name: str, bookmark_id):
         """Add's a 'bookmarkStart' entry."""
