@@ -67,6 +67,9 @@ class Paragraph(StoryChild):
         Note that this method does not support bookmarking against various cells in a table.
         Currently only paragraph based textual bookmarks are supported.
 
+        For full control over what ends up included inside the bookmark we recommend
+        using the ``_start_bookmark`` and ``_end_bookmark`` methods instead.
+
         :param name: The name of the bookmark. Unless ``bookmark_id`` is also set
             this name should be unique across the document.
         :param display_text: The text to display; and associate with; alongside the bookmark.
