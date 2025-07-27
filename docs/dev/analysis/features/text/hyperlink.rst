@@ -97,31 +97,27 @@ and addresses typed into the document directly don't, based on my limited experi
     >>> hyperlink.text
     'an excellent Wikipedia article on ferrets'
 
-**Add an external hyperlink** (not yet implemented)::
+**Add an external hyperlink** ::
 
-    >>> hyperlink = paragraph.add_hyperlink(
-    ...   'About', address='http://us.com', fragment='about'
+    >>> hyperlink = paragraph.add_external_hyperlink(
+    ...   'https://example.com', 'About'
     ... )
     >>> hyperlink
     <docx.text.hyperlink.Hyperlink at 0x7f...>
     >>> hyperlink.text
     'About'
     >>> hyperlink.address
-    'http://us.com'
-    >>> hyperlink.fragment
-    'about'
+    'http://example.com'
     >>> hyperlink.url
-    'http://us.com#about'
+    'https://example.com'
 
 **Add an internal hyperlink (to a bookmark)**::
 
-    >>> hyperlink = paragraph.add_hyperlink('Section 1', fragment='Section_1')
+    >>> hyperlink = paragraph.add_internal_hyperlink('bookmark_id', 'Display text')
     >>> hyperlink.text
-    'Section 1'
+    'Display text'
     >>> hyperlink.fragment
-    'Section_1'
-    >>> hyperlink.address
-    ''
+    'bookmark_id'
 
 **Modify hyperlink properties**::
 
