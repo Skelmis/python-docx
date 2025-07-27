@@ -13,7 +13,7 @@ from skelmis.docx.api import Document
 if TYPE_CHECKING:
     from skelmis.docx.opc.part import Part
 
-__version__ = "2.4.0"
+__version__ = "2.5.0"
 
 
 __all__ = ["Document"]
