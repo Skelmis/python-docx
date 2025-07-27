@@ -3,6 +3,11 @@
 Release History
 ---------------
 
+2.5.0 (2025-07-27)
+++++++++++++++++++
+
+* Add support for inserting `Run` objects to `Hyperlinks`
+
 2.4.0 (2025-07-08)
 ++++++++++++++++++
 
