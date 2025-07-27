@@ -10,6 +10,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from skelmis.docx.shared import Parented
+from skelmis.docx.styles.style import CharacterStyle
 from skelmis.docx.text.run import Run
 
 if TYPE_CHECKING:
@@ -119,3 +120,21 @@ class Hyperlink(Parented):
         if not address:
             return ""
         return f"{address}#{fragment}" if fragment else address
+
+    def insert_run(self, text: str | None = None, style: str | CharacterStyle | None = None) -> Run:
+        """Append run containing `text` and having character-style `style`.
+
+        `text` can contain tab (``\\t``) characters, which are converted to the
+        appropriate XML form for a tab. `text` can also include newline (``\\n``) or
+        carriage return (``\\r``) characters, each of which is converted to a line
+        break. When `text` is `None`, the new run is empty.
+        """
+        r = self._hyperlink.add_r()
+        run = Run(r, self)
+        if text:
+            run.text = text
+        if style:
+            run.style = style
+
+        self._hyperlink.append(r)  # type: ignore
+        return Run(r, self._parent)

@@ -23,6 +23,7 @@ class CT_P(BaseOxmlElement):
 
     add_r: Callable[[], CT_R]
     get_or_add_pPr: Callable[[], CT_PPr]
+    add_hyperlink: Callable[[], CT_Hyperlink]
     hyperlink_lst: List[CT_Hyperlink]
     r_lst: List[CT_R]
 

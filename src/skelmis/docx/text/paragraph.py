@@ -37,26 +37,29 @@ class Paragraph(StoryChild):
     def add_internal_hyperlink(
         self,
         bookmark_name: str,
-        display_text: str,
+        display_text: str | None = None,
+        style: str | CharacterStyle | None = None,
     ) -> Hyperlink:
         """Add an internal hyperlink to a bookmark within the document.
 
+        You may leave ``display_text`` blank and instead use the ``insert_run`` method
+        on the returned :py:class:`Hyperlink` object.
+
         :param bookmark_name: The name of the bookmark as provided to ``add_bookmark``.
         :param display_text: The display text to put in the document and associate with this link.
+        :param style: The style to associate with this link.
         """
-        hyperlink = OxmlElement("w:hyperlink")
+        ct_hyperlink = self._p.add_hyperlink()
 
-        hyperlink.set(
+        ct_hyperlink.set(
             qn("w:anchor"),
             bookmark_name,
         )
-
-        new_run = OxmlElement("w:r")
-        new_run.append(OxmlElement("w:rPr"))
-        new_run.text = display_text
-        hyperlink.append(new_run)
-        self._p.append(hyperlink)
-        return Hyperlink(hyperlink, self)
+        self._p.append(ct_hyperlink)
+        hyperlink_obj = Hyperlink(ct_hyperlink, self)
+        if display_text is not None:
+            hyperlink_obj.insert_run(display_text, style)
+        return hyperlink_obj
 
     # noinspection PyUnboundLocalVariable
     def add_bookmark(
