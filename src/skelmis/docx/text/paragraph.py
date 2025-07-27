@@ -12,7 +12,7 @@ from skelmis.docx.opc.oxml import BaseOxmlElement
 from skelmis.docx.oxml import OxmlElement
 from skelmis.docx.oxml.ns import qn
 from skelmis.docx.oxml.text.run import CT_R
-from skelmis.docx.shared import Length, StoryChild
+from skelmis.docx.shared import Length, StoryChild, RGBColor
 from skelmis.docx.styles.style import ParagraphStyle
 from skelmis.docx.text.hyperlink import Hyperlink
 from skelmis.docx.text.pagebreak import RenderedPageBreak
@@ -284,7 +284,7 @@ class Paragraph(StoryChild):
         url: str,
         text: str,
         *,
-        color: str | None = "0000FF",
+        color: RGBColor | None = RGBColor(0, 0, 255),
         underline: bool = True,
     ) -> Hyperlink:
         """
@@ -294,51 +294,30 @@ class Paragraph(StoryChild):
 
         :param url: A string containing the required url
         :param text: The text displayed for the url
-        :param color: The color of the text displayed
+        :param color: The color of the text displayed. Must be ``RGBColor``
         :param underline: Whether the text is underlined or not
         :return: The hyperlink object.
         """
-        # Sourced from https://github.com/python-openxml/python-docx/issues/74#issuecomment-261169410
+        # Partially sourced from https://github.com/python-openxml/python-docx/issues/74#issuecomment-261169410
 
         # This gets access to the document.xml.rels file and gets a new relation id value
         part = self.part
         r_id = part.relate_to(url, RELATIONSHIP_TYPE.HYPERLINK, is_external=True)
 
         # Create the w:hyperlink tag and add needed values
-        hyperlink = OxmlElement("w:hyperlink")
+        hyperlink = self._p.add_hyperlink()
+        hyperlink_obj = Hyperlink(hyperlink, self)
         hyperlink.set(
             qn("r:id"),
             r_id,
         )
-
-        # Create a w:r element
-        new_run = OxmlElement("w:r")
-
-        # Create a new w:rPr element
-        rPr = OxmlElement("w:rPr")
-
-        # Add color if it is given
+        run = hyperlink_obj.insert_run(text)
+        run.underline = underline
         if color is not None:
-            c = OxmlElement("w:color")
-            c.set(qn("w:val"), color)
-            rPr.append(c)
-
-        if underline:
-            u = OxmlElement("w:u")
-            u.set(qn("w:val"), "single")
-            rPr.append(u)
-        else:
-            u = OxmlElement("w:u")
-            u.set(qn("w:val"), "none")
-            rPr.append(u)
-
-        # Join all the xml elements together and add the required text to the w:r element
-        new_run.append(rPr)
-        new_run.text = text
-        hyperlink.append(new_run)
+            run.font.color.rgb = color
 
         self._p.append(hyperlink)
-        return Hyperlink(hyperlink, self)
+        return hyperlink_obj
 
     def insert_horizontal_rule(self):
         """Insert a horizontal rule at the bottom of the current paragraph."""
