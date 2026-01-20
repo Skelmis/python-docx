@@ -10,7 +10,7 @@ keywords = ["Docx"]
 dependencies = [
     "lxml>=5.0.0",
     "typing-extensions>=4.12.2,<5",
-    "pywin32==307 ; sys_platform == 'windows'",
+    "pywin32>=307 ; sys_platform == 'windows'",
 ]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
